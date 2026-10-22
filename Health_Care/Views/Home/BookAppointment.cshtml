@@ -1,0 +1,303 @@
+﻿
+@model Health_Care.Models.Appointment
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Book Appointment - CarePlus</title>
+
+    <link href="~/Content/book-appointment.css" rel="stylesheet" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="appointment-page">
+
+        <!-- LEFT SECTION -->
+        <div class="left-section">
+
+            <div class="brand">
+                <div class="logo">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+
+                <h1>Care<span>Plus</span></h1>
+            </div>
+
+            <h2>Book Your<br />Appointment</h2>
+
+            <p>
+                Schedule an appointment with our trusted doctors
+                and get quality healthcare at the right time.
+            </p>
+
+            <div class="benefits">
+
+                <div class="benefit">
+                    <i class="fa-solid fa-user-doctor"></i>
+                    <span>Experienced Doctors</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="fa-solid fa-calendar-check"></i>
+                    <span>Easy Appointment Booking</span>
+                </div>
+
+                <div class="benefit">
+                    <i class="fa-solid fa-shield-heart"></i>
+                    <span>Safe & Secure Healthcare</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SECTION -->
+        <div class="right-section">
+
+            <div class="appointment-card">
+
+                <div class="form-header">
+                    <h2>Book Appointment</h2>
+
+                    <p>
+                        Select doctor and appointment details
+                    </p>
+                </div>
+
+
+                <form action="@Url.Action("BookAppointment", "Home")"
+                      method="post">
+
+
+                    <!-- PATIENT DETAILS -->
+
+                    <h3 class="section-title">
+                        <i class="fa-solid fa-user"></i>
+                        Patient Details
+                    </h3>
+
+
+                    <div class="row">
+
+                        <div class="form-group">
+
+                            <label>First Name</label>
+
+                            <input type="text"
+                                   name="FirstName"
+                                   value="@Session["FN"]"
+                                   readonly />
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>Last Name</label>
+
+                            <input type="text"
+                                   name="LastName"
+                                   value="@Session["LN"]"
+                                   readonly />
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+
+                        <input type="email"
+                               name="Email"
+                               value="@Session["Email"]"
+                               readonly />
+
+                    </div>
+
+
+                    <!-- DOCTOR DETAILS -->
+
+                    <h3 class="section-title">
+                        <i class="fa-solid fa-user-doctor"></i>
+                        Doctor Details
+                    </h3>
+
+
+                    <div class="form-group">
+
+                        <label>Select Doctor</label>
+
+                        <select name="DoctorId" required>
+
+                            <option value="">-- Select Doctor --</option>
+
+                            @foreach (var doctor in ViewBag.Doctors)
+                            {
+                                <option value="@doctor.DoctorId">
+
+                                    Dr. @doctor.FirstName
+                                    @doctor.LastName
+                                    -
+                                    @doctor.Specialization
+
+                                </option>
+                            }
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="row">
+
+
+                        <div class="form-group">
+
+                            <label>Appointment Date</label>
+
+                            @Html.TextBoxFor(
+                                model => model.AppointmentDate,
+                                new
+                                {
+                                    @class = "form-control",
+                                    type = "date",
+                                    min = DateTime.Now.ToString("yyyy-MM-dd")
+                                })
+
+                            @Html.ValidationMessageFor(
+                                model => model.AppointmentDate,
+                                "",
+                                new { @class = "error" })
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(
+                             model => model.AppointmentTime,
+                             new
+                             {
+                                 @class = "form-control",
+                                 type = "time",
+                                 id = "AppointmentTime"
+                             })
+
+                            @Html.ValidationMessageFor(
+                                model => model.AppointmentTime,
+                                "",
+                                new { @class = "error" })
+                            
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Reason for Visit</label>
+
+                        <textarea name="Reason"
+                                  rows="4"
+                                  placeholder="Enter reason for appointment..."
+                                  required></textarea>
+
+                    </div>
+
+
+                    <button type="submit" class="book-btn">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                        Book Appointment
+
+                    </button>
+
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+    <script>
+
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var dateInput =
+            document.getElementById("AppointmentDate");
+
+        var timeInput =
+            document.getElementById("AppointmentTime");
+
+
+        function setMinimumTime() {
+
+            if (!dateInput.value) {
+                timeInput.removeAttribute("min");
+                return;
+            }
+
+
+            var selectedDate =
+                new Date(dateInput.value);
+
+            var today =
+                new Date();
+
+
+            selectedDate.setHours(0, 0, 0, 0);
+
+            today.setHours(0, 0, 0, 0);
+
+
+            
+            if (selectedDate.getTime() === today.getTime()) {
+
+                var now = new Date();
+
+                var hours =
+                    String(now.getHours()).padStart(2, "0");
+
+                var minutes =
+                    String(now.getMinutes()).padStart(2, "0");
+
+                timeInput.min =
+                    hours + ":" + minutes;
+
+            }
+            else {
+
+                timeInput.removeAttribute("min");
+
+            }
+        }
+
+
+        dateInput.addEventListener(
+            "change",
+            setMinimumTime
+        );
+
+
+        setMinimumTime();
+
+    });
+
+    </script>
+</body>
+</html>

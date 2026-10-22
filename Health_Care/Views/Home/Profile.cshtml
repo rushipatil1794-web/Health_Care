@@ -1,0 +1,616 @@
+﻿@{
+    ViewBag.Title = "My Profile";
+
+    string firstName = ViewBag.FirstName;
+    string lastName = ViewBag.LastName;
+    string email = ViewBag.Email;
+    string dob = ViewBag.DateOfBirth;
+    string gender = ViewBag.Gender;
+    string bloodGroup = ViewBag.BloodGroup;
+    string mobile = ViewBag.MobileNumber;
+    string address = ViewBag.Address;
+    string city = ViewBag.City;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <title>My Profile - CarePlus</title>
+
+
+    <!-- CSS -->
+
+    <link href="~/Content/patient-profile.css"
+          rel="stylesheet" />
+
+
+    <!-- BOOTSTRAP -->
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet" />
+
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SUCCESS ALERT
+    ====================================================== -->
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert-message">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span>
+                @TempData["SuccessMessage"]
+            </span>
+
+            <button type="button"
+                    onclick="this.parentElement.remove()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+    }
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <div class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            CarePlus
+
+        </div>
+
+
+        <!-- PATIENT MINI PROFILE -->
+
+        <div class="patient-mini">
+
+            <div class="patient-icon">
+
+                <i class="fa-solid fa-user"></i>
+
+            </div>
+
+
+            <h5>
+                @firstName @lastName
+            </h5>
+
+
+            <p>
+                @email
+            </p>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <ul class="menu">
+
+
+            <!-- DASHBOARD -->
+
+            <li>
+
+                <a href="@Url.Action("PatientDashboard","Home")">
+
+                    <i class="fa-solid fa-house"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+
+            <!-- BOOK APPOINTMENT -->
+
+            <li>
+
+                <a href="@Url.Action("BookAppointment","Home")">
+
+                    <i class="fa-solid fa-calendar-plus"></i>
+
+                    Book Appointment
+
+                </a>
+
+            </li>
+
+
+            <!-- MY APPOINTMENTS -->
+
+            <li>
+
+                <a href="#">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                    My Appointments
+
+                </a>
+
+            </li>
+
+
+            <!-- MY PROFILE -->
+
+            <li>
+
+                <a href="@Url.Action("Profile","Home")"
+                   class="active">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    My Profile
+
+                </a>
+
+            </li>
+
+
+            <!-- LOGOUT -->
+
+            <li>
+
+                <a href="@Url.Action("Logout","Home")">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    Logout
+
+                </a>
+
+            </li>
+
+
+        </ul>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <div class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <div class="topbar">
+
+            <h3>
+                My Profile
+            </h3>
+
+
+            <div class="user-info">
+
+                <i class="fa-solid fa-user-circle"></i>
+
+                @firstName @lastName
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             PROFILE CONTAINER
+        ================================================== -->
+
+        <div class="profile-container">
+
+
+            <!-- PROFILE HEADER -->
+
+            <div class="profile-header">
+
+
+                <div class="profile-icon">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h2>
+                        @firstName @lastName
+                    </h2>
+
+
+                    <p>
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                        @email
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 UPDATE FORM
+            ================================================== -->
+
+            <form method="post"
+                  action="@Url.Action("UpdateProfile","Home")"
+                  onsubmit="return confirmUpdate();">
+
+
+                <div class="profile-card">
+
+
+                    <!-- CARD TITLE -->
+
+                    <div class="card-title">
+
+                        <h4>
+
+                            <i class="fa-solid fa-user"></i>
+
+                            Personal Information
+
+                        </h4>
+
+                    </div>
+
+
+
+                    <div class="row">
+
+
+                        <!-- FIRST NAME -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                First Name
+                            </label>
+
+                            <input type="text"
+                                   name="FirstName"
+                                   value="@firstName"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- LAST NAME -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                Last Name
+                            </label>
+
+                            <input type="text"
+                                   name="LastName"
+                                   value="@lastName"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- EMAIL -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   name="Email"
+                                   value="@email"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- MOBILE -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                Mobile Number
+                            </label>
+
+                            <input type="text"
+                                   name="MobileNumber"
+                                   value="@mobile"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- DOB -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                Date of Birth
+                            </label>
+
+                            <input type="date"
+                                   name="DateOfBirth"
+                                   value="@dob"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- GENDER -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                Gender
+                            </label>
+
+                            <select name="Gender"
+                                    class="form-control"
+                                    required>
+
+                                <option value="@gender">
+                                    @gender
+                                </option>
+
+                                <option value="Male">
+                                    Male
+                                </option>
+
+                                <option value="Female">
+                                    Female
+                                </option>
+
+                                <option value="Other">
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- BLOOD GROUP -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                Blood Group
+                            </label>
+
+                            <select name="BloodGroup"
+                                    class="form-control"
+                                    required>
+
+                                <option value="@bloodGroup">
+                                    @bloodGroup
+                                </option>
+
+                                <option value="A+">
+                                    A+
+                                </option>
+
+                                <option value="A-">
+                                    A-
+                                </option>
+
+                                <option value="B+">
+                                    B+
+                                </option>
+
+                                <option value="B-">
+                                    B-
+                                </option>
+
+                                <option value="AB+">
+                                    AB+
+                                </option>
+
+                                <option value="AB-">
+                                    AB-
+                                </option>
+
+                                <option value="O+">
+                                    O+
+                                </option>
+
+                                <option value="O-">
+                                    O-
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- CITY -->
+
+                        <div class="col-md-6 mb-3">
+
+                            <label>
+                                City
+                            </label>
+
+                            <input type="text"
+                                   name="City"
+                                   value="@city"
+                                   class="form-control"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="col-md-12 mb-3">
+
+                            <label>
+                                Address
+                            </label>
+
+                            <textarea name="Address"
+                                      class="form-control"
+                                      rows="3"
+                                      required>@address</textarea>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- =================================================
+                         BUTTONS
+                    ================================================== -->
+
+                    <div class="buttons">
+
+
+                        <!-- BACK -->
+
+                        <a href="@Url.Action("PatientDashboard","Home")"
+                           class="btn btn-secondary">
+
+                            <i class="fa-solid fa-arrow-left"></i>
+
+                            Back
+
+                        </a>
+
+
+
+                        <!-- UPDATE -->
+
+                        <button type="submit"
+                                class="btn btn-success">
+
+                            <i class="fa-solid fa-floppy-disk"></i>
+
+                            Update Profile
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =====================================================
+         CONFIRMATION JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+                function confirmUpdate() {
+
+                    var result = confirm(
+                        "Are you sure you want to update your profile?"
+                    );
+
+                    if (result) {
+
+                        return true;
+
+                    }
+                    else {
+
+                        return false;
+
+                    }
+
+                }
+
+
+                /* =================================================
+                   AUTO HIDE SUCCESS MESSAGE
+                ================================================= */
+
+                setTimeout(function () {
+
+                    var alertBox =
+                        document.querySelector(".alert-message");
+
+                    if (alertBox != null) {
+
+                        alertBox.remove();
+
+                    }
+
+                }, 4000);
+
+    </script>
+
+
+</body>
+
+</html>

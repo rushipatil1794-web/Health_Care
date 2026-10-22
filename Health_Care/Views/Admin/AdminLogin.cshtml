@@ -1,0 +1,144 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>CarePlus Admin Login</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/Content/admin-login.css" />
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-left">
+
+            <div class="brand">
+
+                <i class="fa-solid fa-heart-pulse"></i>
+
+                <span>CarePlus</span>
+
+            </div>
+
+            <div class="left-content">
+
+                <h1>
+                    Welcome Back,
+                    <span>Admin</span>
+                </h1>
+
+                <p>
+                    Manage patients, doctors and appointments
+                    from one secure dashboard.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="login-right">
+
+            <div class="login-box">
+
+                <div class="icon-box">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+                <h2>Admin Login</h2>
+
+                <p class="subtitle">
+                    Login to your CarePlus admin account
+                </p>
+
+
+                @if (ViewBag.Message != null)
+                {
+                    <div class="error-message">
+
+                        <i class="fa-solid fa-circle-exclamation"></i>
+
+                        @ViewBag.Message
+
+                    </div>
+                }
+
+
+                <form method="post"
+                      action="@Url.Action("AdminLogin","Admin")">
+
+                    <div class="input-group">
+
+                        <label>Email</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input type="email"
+                                   name="Email"
+                                   placeholder="Enter admin email"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="input-group">
+
+                        <label>Password</label>
+
+                        <div class="input-box">
+
+                            <i class="fa-solid fa-lock"></i>
+
+                            <input type="password"
+                                   name="Password"
+                                   placeholder="Enter password"
+                                   required />
+
+                        </div>
+
+                    </div>
+
+
+                    <button type="submit"
+                            class="login-btn">
+
+                        Login
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

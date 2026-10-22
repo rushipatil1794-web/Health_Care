@@ -1,0 +1,263 @@
+﻿@model Health_Care.Models.patient
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <title>Edit Patient - CarePlus</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <link rel="stylesheet"
+          href="~/Content/admin-edit-patient.css" />
+
+</head>
+
+<body>
+
+    <div class="edit-container">
+
+        <div class="edit-card">
+
+            <div class="page-header">
+
+                <div class="icon-box">
+                    <i class="fa-solid fa-user-pen"></i>
+                </div>
+
+                <div>
+
+                    <h2>Edit Patient</h2>
+
+                    <p>
+                        Update patient information
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <form method="post"
+                  action="@Url.Action("UpdatePatient","Admin")"
+                  onsubmit="return confirmUpdatePatient();">
+
+                <input type="hidden"
+                       name="PatientId"
+                       value="@Model.PatientId" />
+
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>First Name</label>
+
+                        <input type="text"
+                               name="FirstName"
+                               value="@Model.FirstName"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Last Name</label>
+
+                        <input type="text"
+                               name="LastName"
+                               value="@Model.LastName"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Date of Birth</label>
+
+                        <input type="date"
+                               name="DateOfBirth"
+                               value="@Model.DateOfBirth.ToString("yyyy-MM-dd")"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Gender</label>
+
+                        <select name="Gender"
+                                class="form-control"
+                                required>
+
+                            <option value="Male"
+                                    @(Model.Gender == "Male" ? "selected" : "")>
+                                Male
+                            </option>
+
+                            <option value="Female"
+                                    @(Model.Gender == "Female" ? "selected" : "")>
+                                Female
+                            </option>
+
+                            <option value="Other"
+                                    @(Model.Gender == "Other" ? "selected" : "")>
+                                Other
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Blood Group</label>
+
+                        <input type="text"
+                               name="BloodGroup"
+                               value="@Model.BloodGroup"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Mobile Number</label>
+
+                        <input type="text"
+                               name="MobileNumber"
+                               value="@Model.MobileNumber"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>Email</label>
+
+                        <input type="email"
+                               name="Email"
+                               value="@Model.Email"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-6 mb-3">
+
+                        <label>City</label>
+
+                        <input type="text"
+                               name="City"
+                               value="@Model.City"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-3">
+
+                        <label>Address</label>
+
+                        <textarea name="Address"
+                                  class="form-control"
+                                  rows="3"
+                                  required>@Model.Address</textarea>
+
+                    </div>
+
+
+                    <div class="col-md-12 mb-3">
+
+                        <label>Password</label>
+
+                        <input type="text"
+                               name="Password"
+                               value="@Model.Password"
+                               class="form-control"
+                               required />
+
+                    </div>
+
+                </div>
+
+
+                <div class="button-area">
+
+                    <a href="@Url.Action("Patients","Admin")"
+                       class="cancel-btn">
+
+                        <i class="fa-solid fa-arrow-left"></i>
+                        Cancel
+
+                    </a>
+
+
+                    <button type="submit"
+                            class="update-btn">
+
+                        <i class="fa-solid fa-check"></i>
+                        Update Patient
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+    function confirmUpdatePatient()
+    {
+        var result = confirm(
+            "Are you sure you want to update this patient?"
+        );
+
+        return result;
+    }
+
+
+    function confirmDeletePatient()
+    {
+        var result = confirm(
+            "Are you sure you want to delete this patient?"
+        );
+
+        return result;
+    }
+
+    </script>
+
+</body>
+
+</html>

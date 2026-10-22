@@ -1,0 +1,284 @@
+﻿```css
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f0f8f7;
+    color: #263238;
+}
+
+
+/* MAIN PAGE */
+
+.appointment-page {
+    min-height: 100vh;
+    display: flex;
+}
+
+
+/* LEFT SECTION */
+
+.left-section {
+    width: 40%;
+    background: linear-gradient(135deg, #00695c, #00a896);
+    color: white;
+    padding: 70px 55px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 55px;
+}
+
+
+.logo {
+    width: 52px;
+    height: 52px;
+    background: white;
+    color: #00897b;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 27px;
+}
+
+
+.brand h1 {
+    font-size: 32px;
+    letter-spacing: 1px;
+}
+
+
+    .brand h1 span {
+        color: #b2dfdb;
+    }
+
+
+.left-section h2 {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 22px;
+}
+
+
+.left-section > p {
+    font-size: 17px;
+    line-height: 1.7;
+    max-width: 500px;
+    opacity: 0.95;
+}
+
+
+.benefits {
+    margin-top: 40px;
+}
+
+
+.benefit {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 22px;
+    font-size: 16px;
+}
+
+
+    .benefit i {
+        width: 42px;
+        height: 42px;
+        background: rgba(255,255,255,0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+/* RIGHT SECTION */
+
+.right-section {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+
+.appointment-card {
+    width: 100%;
+    max-width: 700px;
+    background: white;
+    padding: 38px;
+    border-radius: 20px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08);
+}
+
+
+.form-header {
+    margin-bottom: 25px;
+}
+
+
+    .form-header h2 {
+        color: #00695c;
+        font-size: 30px;
+        margin-bottom: 8px;
+    }
+
+
+    .form-header p {
+        color: #777;
+    }
+
+
+/* SECTION TITLE */
+
+.section-title {
+    color: #00695c;
+    font-size: 17px;
+    margin: 25px 0 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+
+/* FORM */
+
+.row {
+    display: flex;
+    gap: 18px;
+}
+
+
+.form-group {
+    width: 100%;
+    margin-bottom: 18px;
+}
+
+
+    .form-group label {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 14px;
+        font-weight: 600;
+        color: #37474f;
+    }
+
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        width: 100%;
+        padding: 13px 14px;
+        border: 1px solid #d5e2e0;
+        border-radius: 9px;
+        outline: none;
+        font-size: 14px;
+        background: #fbfdfd;
+        transition: 0.3s;
+    }
+
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #00a896;
+            box-shadow: 0 0 0 3px rgba(0,168,150,0.10);
+        }
+
+
+        .form-group input[readonly] {
+            background: #f1f5f4;
+            color: #607d7a;
+        }
+
+
+textarea {
+    resize: vertical;
+}
+
+
+/* BUTTON */
+
+.book-btn {
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 10px;
+    background: linear-gradient( 135deg, #00695c, #00a896 );
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 8px;
+}
+
+
+    .book-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,105,92,0.25);
+    }
+
+
+/* RESPONSIVE */
+
+@media(max-width: 900px) {
+
+    .appointment-page {
+        flex-direction: column;
+    }
+
+    .left-section,
+    .right-section {
+        width: 100%;
+    }
+
+    .left-section {
+        padding: 45px 30px;
+    }
+
+        .left-section h2 {
+            font-size: 34px;
+        }
+
+    .right-section {
+        padding: 25px 15px;
+    }
+}
+
+
+@media(max-width: 600px) {
+
+    .appointment-card {
+        padding: 25px 18px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .left-section {
+        padding: 35px 22px;
+    }
+
+    .brand {
+        margin-bottom: 35px;
+    }
+}
+
+```

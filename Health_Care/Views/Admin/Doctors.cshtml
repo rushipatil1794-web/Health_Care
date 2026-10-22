@@ -1,0 +1,640 @@
+﻿@model List<Health_Care.Models.Doctor>
+
+@{
+    Layout = null;
+
+    string adminName =
+        Session["AdminName"] != null
+        ? Session["AdminName"].ToString()
+        : "Admin";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Doctors - CarePlus Admin</title>
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <!-- Doctor CSS -->
+
+    <link rel="stylesheet"
+          href="~/Content/admin-doctors.css" />
+
+</head>
+
+
+<body>
+
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            <span>CarePlus</span>
+
+        </div>
+
+
+        <nav>
+
+
+            <!-- Dashboard -->
+
+            <a href="@Url.Action("Dashboard","Admin")">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>Dashboard</span>
+
+            </a>
+
+
+            <!-- Patients -->
+
+            <a href="@Url.Action("Patients","Admin")">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>Patients</span>
+
+            </a>
+
+
+            <!-- Doctors -->
+
+            <a href="@Url.Action("Doctors","Admin")"
+               class="active">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+                <span>Doctors</span>
+
+            </a>
+
+
+            <!-- Appointments -->
+
+            <a href="@Url.Action("Appointments","Admin")">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>Appointments</span>
+
+            </a>
+
+
+            <!-- Profile -->
+
+            <a href="@Url.Action("Profile","Admin")">
+
+                <i class="fa-solid fa-user"></i>
+
+                <span>My Profile</span>
+
+            </a>
+
+
+            <!-- Logout -->
+
+            <a href="@Url.Action("Logout","Admin")">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>Logout</span>
+
+            </a>
+
+
+        </nav>
+
+
+    </aside>
+
+
+
+    <!-- ========================= -->
+    <!-- MAIN CONTENT -->
+    <!-- ========================= -->
+
+    <main class="main-content">
+
+
+        <!-- ========================= -->
+        <!-- TOPBAR -->
+        <!-- ========================= -->
+
+        <header class="topbar">
+
+
+            <div class="page-heading">
+
+                <h1>Doctors</h1>
+
+                <p>
+                    Manage registered doctors
+                </p>
+
+            </div>
+
+
+            <div class="admin-name">
+
+                <div class="admin-icon">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+                <span>
+                    @adminName
+                </span>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- ========================= -->
+        <!-- SUCCESS MESSAGE -->
+        <!-- ========================= -->
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>
+                    @TempData["SuccessMessage"]
+                </span>
+
+            </div>
+        }
+
+
+
+        <!-- ========================= -->
+        <!-- ERROR MESSAGE -->
+        <!-- ========================= -->
+
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="error-message">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <span>
+                    @TempData["ErrorMessage"]
+                </span>
+
+            </div>
+        }
+
+
+
+        <!-- ========================= -->
+        <!-- CONTENT CARD -->
+        <!-- ========================= -->
+
+        <section class="content-card">
+
+
+            <!-- Section Header -->
+
+            <div class="section-header">
+
+
+                <div>
+
+                    <h2>
+                        All Doctors
+                    </h2>
+
+                    <p>
+                        View and manage all registered doctors
+                    </p>
+
+                </div>
+
+
+                <div class="doctor-count">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                    <span>
+                        Total Doctors
+                    </span>
+
+                    <strong>
+                        @Model.Count
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- ========================= -->
+            <!-- TABLE -->
+            <!-- ========================= -->
+
+            <div class="table-wrapper">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                ID
+                            </th>
+
+                            <th>
+                                Doctor
+                            </th>
+
+                            <th>
+                                Gender
+                            </th>
+
+                            <th>
+                                Specialization
+                            </th>
+
+                            <th>
+                                Department
+                            </th>
+
+                            <th>
+                                Experience
+                            </th>
+
+                            <th>
+                                Qualification
+                            </th>
+
+                            <th>
+                                Mobile
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Address
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        @if (Model != null && Model.Count > 0)
+                        {
+
+
+                            foreach (var d in Model)
+                            {
+
+                                <tr>
+
+
+                                    <!-- Doctor ID -->
+
+                                    <td>
+
+                                        <span class="doctor-id">
+
+                                            #@d.DoctorId
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- Doctor Name -->
+
+                                    <td>
+
+                                        <div class="doctor-name">
+
+
+                                            <div class="doctor-avatar">
+
+                                                <i class="fa-solid fa-user-doctor"></i>
+
+                                            </div>
+
+
+                                            <div>
+
+                                                <strong>
+
+                                                    Dr.
+                                                    @d.FirstName
+                                                    @d.LastName
+
+                                                </strong>
+
+                                                <small>
+                                                    Doctor
+                                                </small>
+
+                                            </div>
+
+
+                                        </div>
+
+                                    </td>
+
+
+
+                                    <!-- Gender -->
+
+                                    <td>
+
+                                        <span class="normal-text">
+
+                                            @d.Gender
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- Specialization -->
+
+                                    <td>
+
+                                        <span class="specialization">
+
+                                            @d.Specialization
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- Department -->
+
+                                    <td>
+
+                                        @d.Department
+
+                                    </td>
+
+
+
+                                    <!-- Experience -->
+
+                                    <td>
+
+                                        <span class="experience">
+
+                                            @d.Experience years
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- Qualification -->
+
+                                    <td>
+
+                                        @d.Qualification
+
+                                    </td>
+
+
+
+                                    <!-- Mobile -->
+
+                                    <td>
+
+                                        <span class="mobile">
+
+                                            <i class="fa-solid fa-phone"></i>
+
+                                            @d.MobileNumber
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- Email -->
+
+                                    <td>
+
+                                        <span class="email">
+
+                                            @d.Email
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- Address -->
+
+                                    <td>
+
+                                        <span class="address">
+
+                                            @d.Address
+
+                                        </span>
+
+                                    </td>
+
+
+
+                                    <!-- ACTION -->
+
+                                    <td>
+
+
+                                        <div class="action-buttons">
+
+
+                                            <!-- EDIT BUTTON -->
+
+                                            <a href="@Url.Action(
+                                                "EditDoctor",
+                                                "Admin",
+                                                new
+                                                {
+                                                    doctorId = d.DoctorId
+                                                }
+                                            )"
+                                               class="edit-btn">
+
+                                                <i class="fa-solid fa-pen"></i>
+
+                                                Edit
+
+                                            </a>
+
+
+
+                                            <!-- DELETE FORM -->
+
+                                            <form method="post"
+                                                  action="@Url.Action("DeleteDoctor", "Admin")"
+                                                  class="delete-form">
+
+                                                <input type="hidden"
+                                                       name="doctorId"
+                                                       value="@d.DoctorId" />
+
+                                                <button type="submit"
+                                                        class="delete-btn">
+
+                                                    <i class="fa-solid fa-trash"></i>
+                                                    Delete
+
+                                                </button>
+
+                                            </form>
+
+                                        </div>
+
+
+                                    </td>
+
+
+                                </tr>
+
+                            }
+
+
+                        }
+                        else
+                        {
+
+                            <!-- NO DATA -->
+
+                            <tr>
+
+                                <td colspan="11"
+                                    class="no-data">
+
+
+                                    <div class="empty-icon">
+
+                                        <i class="fa-solid fa-user-doctor"></i>
+
+                                    </div>
+
+
+                                    <h3>
+                                        No Doctors Found
+                                    </h3>
+
+
+                                    <p>
+                                        There are no registered doctors.
+                                    </p>
+
+
+                                </td>
+
+                            </tr>
+
+                        }
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- ========================= -->
+    <!-- JAVASCRIPT -->
+    <!-- ========================= -->
+
+    <script>
+
+            document.addEventListener("DOMContentLoaded", function () {
+
+                var deleteForms =
+                    document.querySelectorAll(".delete-form");
+
+                deleteForms.forEach(function (form) {
+
+                    form.addEventListener("submit", function (event) {
+
+                        var result = window.confirm(
+                            "Are you sure you want to delete this doctor?"
+                        );
+
+                        if (!result) {
+
+                            event.preventDefault();
+
+                        }
+
+                    });
+
+                });
+
+            });
+
+    </script>
+
+</body>
+
+</html>

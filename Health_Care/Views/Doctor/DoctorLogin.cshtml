@@ -1,0 +1,214 @@
+﻿
+@model Health_Care.Models.Doctor
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Doctor Login - CarePlus</title>
+
+    <link href="~/Content/doctor-login.css"
+          rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <!-- LEFT SIDE -->
+
+        <div class="left-section">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    +
+                </div>
+
+                <span>CarePlus</span>
+
+            </div>
+
+
+            <div class="left-content">
+
+                <h1>
+                    Welcome Back
+                </h1>
+
+                <h2>
+                    Your Care.
+                    <br />
+                    Your Patients.
+                </h2>
+
+                <p>
+                    Login to your CarePlus doctor account
+                    and manage your patients, appointments
+                    and professional profile.
+                </p>
+
+
+                <div class="benefits">
+
+                    <div class="benefit">
+                        <span>✓</span>
+                        Manage your appointments
+                    </div>
+
+                    <div class="benefit">
+                        <span>✓</span>
+                        View patient information
+                    </div>
+
+                    <div class="benefit">
+                        <span>✓</span>
+                        Manage your professional profile
+                    </div>
+
+                    <div class="benefit">
+                        <span>✓</span>
+                        Provide better healthcare
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="right-section">
+
+            <div class="form-header">
+
+                <h1>
+                    Doctor Login
+                </h1>
+
+                <p>
+                    Login to access your CarePlus account
+                </p>
+
+            </div>
+
+
+            @if (ViewBag.Message != null)
+            {
+                <div class="error-message">
+                    @ViewBag.Message
+                </div>
+            }
+
+
+            <form action="@Url.Action("DoctorLogin", "Doctor")"
+                  method="post">
+
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label>
+                        Email Address
+                    </label>
+
+                    <input type="email"
+                           name="Email"
+                           class="form-control"
+                           placeholder="Enter your email address"
+                           required />
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label>
+                        Password
+                    </label>
+
+                    <input type="password"
+                           name="Password"
+                           id="Password"
+                           class="form-control"
+                           placeholder="Enter your password"
+                           required />
+
+                </div>
+
+
+                <!-- REMEMBER -->
+
+                <div class="remember-section">
+
+                    <label>
+
+                        <input type="checkbox"
+                               name="RememberMe" />
+
+                        Remember me
+
+                    </label>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button type="submit"
+                        class="login-btn">
+
+                    Login to Account
+
+                </button>
+
+
+                <!-- REGISTER -->
+
+                <div class="register-link">
+
+                    Don't have a doctor account?
+
+                    <a href="@Url.Action("DoctorRegistration", "Doctor")">
+                        Register Now
+                    </a>
+
+                </div>
+
+
+                <!-- PATIENT LOGIN -->
+
+                <div class="patient-login">
+
+                    Are you a patient?
+
+                    <a href="@Url.Action("Loginform", "Home")">
+                        Patient Login
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
+

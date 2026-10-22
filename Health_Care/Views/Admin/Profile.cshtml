@@ -1,0 +1,239 @@
+﻿@model Health_Care.Models.Admin
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Admin Profile - CarePlus</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/Content/admin-profile.css" />
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            CarePlus
+
+        </div>
+
+        <nav>
+
+            <a href="@Url.Action("Dashboard","Admin")">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard
+            </a>
+
+            <a href="@Url.Action("Patients","Admin")">
+                <i class="fa-solid fa-users"></i>
+                Patients
+            </a>
+
+            <a href="@Url.Action("Doctors","Admin")">
+                <i class="fa-solid fa-user-doctor"></i>
+                Doctors
+            </a>
+
+            <a href="@Url.Action("Appointments","Admin")">
+                <i class="fa-solid fa-calendar-check"></i>
+                Appointments
+            </a>
+
+            <a href="@Url.Action("Profile","Admin")"
+               class="active">
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </a>
+
+            <a href="@Url.Action("Logout","Admin")">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>My Profile</h1>
+
+                <p>Manage your admin information</p>
+
+            </div>
+
+        </header>
+
+
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <div class="success-message">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                <span>
+                    @TempData["SuccessMessage"]
+                </span>
+
+                <button type="button"
+                        onclick="closeAlert()">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+        }
+
+
+        <section class="profile-card">
+
+            <div class="profile-header">
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user-shield"></i>
+
+                </div>
+
+                <div>
+
+                    <h2>@Model.FullName</h2>
+
+                    <p>Administrator</p>
+
+                </div>
+
+            </div>
+
+
+            <form method="post"
+                  action="@Url.Action("UpdateProfile","Admin")"
+                  onsubmit="return confirmUpdate();">
+
+
+                <input type="hidden"
+                       name="AdminId"
+                       value="@Model.AdminId" />
+
+
+                <div class="form-grid">
+
+
+                    <div class="form-group">
+
+                        <label>Full Name</label>
+
+                        <input type="text"
+                               name="FullName"
+                               value="@Model.FullName"
+                               required />
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Email</label>
+
+                        <input type="email"
+                               name="Email"
+                               value="@Model.Email"
+                               required />
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>Mobile Number</label>
+
+                        <input type="text"
+                               name="MobileNumber"
+                               value="@Model.MobileNumber"
+                               required />
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="button-area">
+
+                    <button type="submit"
+                            class="update-btn">
+
+                        <i class="fa-solid fa-pen-to-square"></i>
+
+                        Update Profile
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+
+    <script>
+
+        function confirmUpdate()
+        {
+            return confirm(
+                "Are you sure you want to update your profile?"
+            );
+        }
+
+
+        function closeAlert()
+        {
+            var alertBox =
+                document.querySelector(".success-message");
+
+            if (alertBox != null)
+            {
+                alertBox.style.display = "none";
+            }
+        }
+
+
+        setTimeout(function ()
+        {
+            closeAlert();
+
+        }, 4000);
+
+    </script>
+
+</body>
+
+</html>

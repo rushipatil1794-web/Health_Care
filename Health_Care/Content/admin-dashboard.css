@@ -1,0 +1,299 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+}
+
+.sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 260px;
+    height: 100vh;
+    background: #0f172a;
+    padding: 25px 15px;
+}
+
+.logo {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 0 15px 30px;
+}
+
+    .logo i {
+        color: #2dd4bf;
+        margin-right: 8px;
+    }
+
+.sidebar nav a {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    color: #94a3b8;
+    text-decoration: none;
+    padding: 14px 15px;
+    border-radius: 9px;
+    margin-bottom: 7px;
+    font-size: 14px;
+}
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+        background: #134e4a;
+        color: white;
+    }
+
+    .sidebar nav a i {
+        width: 20px;
+        text-align: center;
+    }
+
+.main-content {
+    margin-left: 260px;
+    padding: 30px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+    .topbar h1 {
+        font-size: 28px;
+        margin-bottom: 5px;
+    }
+
+    .topbar p {
+        color: #64748b;
+        font-size: 14px;
+    }
+
+.admin-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.admin-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #ccfbf1;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-info strong {
+    display: block;
+    font-size: 14px;
+}
+
+.admin-info small {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+.stat-card {
+    background: white;
+    padding: 20px;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 3px 15px rgba(15,23,42,.05);
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+    .stat-icon.patients {
+        background: #dbeafe;
+        color: #2563eb;
+    }
+
+    .stat-icon.doctors {
+        background: #ccfbf1;
+        color: #0f766e;
+    }
+
+    .stat-icon.appointments {
+        background: #ede9fe;
+        color: #7c3aed;
+    }
+
+    .stat-icon.pending {
+        background: #fef3c7;
+        color: #d97706;
+    }
+
+    .stat-icon.confirmed {
+        background: #dcfce7;
+        color: #16a34a;
+    }
+
+    .stat-icon.completed {
+        background: #cffafe;
+        color: #0891b2;
+    }
+
+    .stat-icon.cancelled {
+        background: #ffe4e6;
+        color: #e11d48;
+    }
+
+.stat-card span {
+    color: #64748b;
+    font-size: 12px;
+}
+
+.stat-card h2 {
+    font-size: 25px;
+    margin-top: 5px;
+}
+
+.content-card {
+    background: white;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 3px 15px rgba(15,23,42,.05);
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+    .section-header h2 {
+        font-size: 20px;
+        margin-bottom: 5px;
+    }
+
+    .section-header p {
+        color: #64748b;
+        font-size: 13px;
+    }
+
+    .section-header a {
+        color: #0f766e;
+        text-decoration: none;
+        font-size: 13px;
+        font-weight: 600;
+    }
+
+        .section-header a i {
+            margin-left: 5px;
+        }
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 12px;
+    text-align: left;
+    padding: 13px;
+}
+
+td {
+    padding: 14px 13px;
+    border-bottom: 1px solid #e2e8f0;
+    font-size: 13px;
+}
+
+.status {
+    display: inline-block;
+    padding: 5px 9px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+    .status.pending {
+        background: #fef3c7;
+        color: #b45309;
+    }
+
+    .status.confirmed {
+        background: #dcfce7;
+        color: #15803d;
+    }
+
+    .status.completed {
+        background: #cffafe;
+        color: #0e7490;
+    }
+
+    .status.cancelled {
+        background: #ffe4e6;
+        color: #be123c;
+    }
+
+@media (max-width: 900px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .topbar {
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .admin-info {
+        display: none;
+    }
+}

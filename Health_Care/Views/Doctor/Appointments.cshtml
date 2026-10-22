@@ -1,0 +1,874 @@
+﻿@model List<Health_Care.Models.Appointment>
+
+@using System.Text
+@using System.Web
+
+@{
+    Layout = null;
+
+    string doctorName =
+        "Dr. " +
+        Convert.ToString(Session["DoctorFN"]) +
+        " " +
+        Convert.ToString(Session["DoctorLN"]);
+
+    string specialization =
+        Convert.ToString(Session["Specialization"]);
+
+   
+
+    StringBuilder tableRows = new StringBuilder();
+
+    if (Model != null && Model.Count > 0)
+    {
+        foreach (var appointment in Model)
+        {
+            string patientName =
+                appointment.FirstName + " " +
+                appointment.LastName;
+
+            string patientNameHtml =
+                HttpUtility.HtmlEncode(patientName);
+
+            string emailHtml =
+                HttpUtility.HtmlEncode(appointment.Email);
+
+            string reasonHtml =
+                HttpUtility.HtmlEncode(appointment.Reason);
+
+            string timeHtml =
+                HttpUtility.HtmlEncode(appointment.AppointmentTime);
+
+            string status =
+                appointment.Status ?? "";
+
+            /*
+                ====================================================
+                STATUS HTML
+                ====================================================
+            */
+
+            string statusHtml = "";
+
+            if (status == "Pending")
+            {
+                statusHtml =
+                    "<span class='status pending'>" +
+                    "<i class='fa-solid fa-clock'></i>" +
+                    "Pending" +
+                    "</span>";
+            }
+            else if (status == "Confirmed")
+            {
+                statusHtml =
+                    "<span class='status confirmed'>" +
+                    "<i class='fa-solid fa-circle-check'></i>" +
+                    "Confirmed" +
+                    "</span>";
+            }
+            else if (status == "Completed")
+            {
+                statusHtml =
+                    "<span class='status completed'>" +
+                    "<i class='fa-solid fa-check-double'></i>" +
+                    "Completed" +
+                    "</span>";
+            }
+            else if (status == "Cancelled")
+            {
+                statusHtml =
+                    "<span class='status cancelled'>" +
+                    "<i class='fa-solid fa-circle-xmark'></i>" +
+                    "Cancelled" +
+                    "</span>";
+            }
+            else
+            {
+                statusHtml =
+                    "<span class='status pending'>" +
+                    HttpUtility.HtmlEncode(status) +
+                    "</span>";
+            }
+
+
+            /*
+                ====================================================
+                MANAGE BUTTONS
+                ====================================================
+            */
+
+            string manageHtml = "";
+
+            if (status == "Pending")
+            {
+                manageHtml =
+                    "<div class='manage-buttons'>" +
+
+                    "<form method='post' " +
+                    "action='" +
+                    Url.Action("ManageAppointment", "Doctor") +
+                    "'>" +
+
+                    "<input type='hidden' " +
+                    "name='appointmentId' " +
+                    "value='" +
+                    appointment.AppointmentId +
+                    "' />" +
+
+                    "<input type='hidden' " +
+                    "name='status' " +
+                    "value='Confirmed' />" +
+
+                    "<button type='submit' " +
+                    "class='confirm-btn'>" +
+
+                    "<i class='fa-solid fa-check'></i>" +
+                    "Confirm" +
+
+                    "</button>" +
+
+                    "</form>" +
+
+                    "<button type='button' " +
+                    "class='cancel-btn cancel-open-btn' " +
+                    "data-id='" +
+                    appointment.AppointmentId +
+                    "'>" +
+
+                    "<i class='fa-solid fa-xmark'></i>" +
+                    "Cancel" +
+
+                    "</button>" +
+
+                    "</div>";
+            }
+            else if (status == "Confirmed")
+            {
+                manageHtml =
+                    "<div class='manage-buttons'>" +
+
+                    "<form method='post' " +
+                    "action='" +
+                    Url.Action("ManageAppointment", "Doctor") +
+                    "'>" +
+
+                    "<input type='hidden' " +
+                    "name='appointmentId' " +
+                    "value='" +
+                    appointment.AppointmentId +
+                    "' />" +
+
+                    "<input type='hidden' " +
+                    "name='status' " +
+                    "value='Completed' />" +
+
+                    "<button type='submit' " +
+                    "class='complete-btn'>" +
+
+                    "<i class='fa-solid fa-check-double'></i>" +
+                    "Complete" +
+
+                    "</button>" +
+
+                    "</form>" +
+
+                    "<button type='button' " +
+                    "class='cancel-btn cancel-open-btn' " +
+                    "data-id='" +
+                    appointment.AppointmentId +
+                    "'>" +
+
+                    "<i class='fa-solid fa-xmark'></i>" +
+                    "Cancel" +
+
+                    "</button>" +
+
+                    "</div>";
+            }
+            else if (status == "Completed")
+            {
+                manageHtml =
+                    "<div class='manage-buttons'>" +
+
+                    "<span class='history-text'>" +
+
+                    "<i class='fa-solid fa-check-double'></i>" +
+
+                    "Completed" +
+
+                    "</span>" +
+
+                    "</div>";
+            }
+            else if (status == "Cancelled")
+            {
+                manageHtml =
+                    "<div class='manage-buttons'>" +
+
+                    "<span class='history-text'>" +
+
+                    "<i class='fa-solid fa-clock-rotate-left'></i>" +
+
+                    "History" +
+
+                    "</span>" +
+
+                    "</div>";
+            }
+
+
+            /*
+                ====================================================
+                MAIN APPOINTMENT ROW
+                ====================================================
+            */
+
+            tableRows.Append(
+                "<tr>" +
+
+                "<td>" +
+                "<strong>#" +
+                appointment.AppointmentId +
+                "</strong>" +
+                "</td>" +
+
+                "<td>" +
+
+                "<div class='patient-info'>" +
+
+                "<div class='patient-avatar'>" +
+
+                "<i class='fa-solid fa-user'></i>" +
+
+                "</div>" +
+
+                "<div>" +
+
+                "<strong>" +
+                patientNameHtml +
+                "</strong>" +
+
+                "</div>" +
+
+                "</div>" +
+
+                "</td>" +
+
+                "<td>" +
+                emailHtml +
+                "</td>" +
+
+                "<td>" +
+                appointment.AppointmentDate.ToString("dd MMM yyyy") +
+                "</td>" +
+
+                "<td>" +
+                timeHtml +
+                "</td>" +
+
+                "<td>" +
+                reasonHtml +
+                "</td>" +
+
+                "<td>" +
+                statusHtml +
+                "</td>" +
+
+                "<td>" +
+                manageHtml +
+                "</td>" +
+
+                "</tr>"
+            );
+
+
+           
+
+            if (status == "Cancelled")
+            {
+                string cancelReasonHtml = "";
+
+                if (!string.IsNullOrEmpty(appointment.CancelReason))
+                {
+                    cancelReasonHtml =
+                        HttpUtility.HtmlEncode(
+                            appointment.CancelReason);
+                }
+                else
+                {
+                    cancelReasonHtml =
+                        "No cancellation reason provided.";
+                }
+
+                tableRows.Append(
+                    "<tr class='cancel-reason-row'>" +
+
+                    "<td colspan='8'>" +
+
+                    "<div class='cancel-reason-box'>" +
+
+                    "<div class='cancel-reason-title'>" +
+
+                    "<i class='fa-solid fa-circle-info'></i>" +
+
+                    "<strong>" +
+                    "Cancellation Reason" +
+                    "</strong>" +
+
+                    "</div>" +
+
+                    "<div class='cancel-reason-text'>" +
+
+                    cancelReasonHtml +
+
+                    "</div>" +
+
+                    "</div>" +
+
+                    "</td>" +
+
+                    "</tr>"
+                );
+            }
+        }
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1" />
+
+    <title>Appointments - CarePlus</title>
+
+
+    <!-- GOOGLE FONT -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap"
+          rel="stylesheet" />
+
+
+    <!-- FONT AWESOME -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="@Url.Content("~/Content/doctor-appointments.css")" />
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <i class="fa-solid fa-heart-pulse"></i>
+
+            <span>
+                CarePlus
+            </span>
+
+        </div>
+
+
+        <div class="doctor-mini-profile">
+
+            <div class="mini-avatar">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+            </div>
+
+            <div>
+
+                <strong>
+                    @doctorName
+                </strong>
+
+                <small>
+                    @specialization
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <nav class="sidebar-menu">
+
+            <a href="@Url.Action("Doctordashboard","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="@Url.Action("Appointments","Doctor")"
+               class="menu-item active">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>
+                    Appointments
+                </span>
+
+            </a>
+
+
+            <a href="@Url.Action("MyPatients","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+                    My Patients
+                </span>
+
+            </a>
+
+
+            <a href="@Url.Action("MyProfile","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+
+        <a href="@Url.Action("Logout","Doctor")"
+           class="menu-item logout">
+
+            <i class="fa-solid fa-right-from-bracket"></i>
+
+            <span>
+                Logout
+            </span>
+
+        </a>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>
+                    Appointments
+                </h1>
+
+                <p>
+                    Manage your patient appointments
+                </p>
+
+            </div>
+
+
+            <div class="top-profile">
+
+                <div class="small-avatar">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        @doctorName
+                    </strong>
+
+                    <span>
+                        @specialization
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             APPOINTMENT CONTAINER
+        ====================================================== -->
+
+        <section class="appointment-container">
+
+
+            <div class="page-header">
+
+                <div>
+
+                    <h2>
+                        Appointment History
+                    </h2>
+
+                    <p>
+                        View and manage all your appointments.
+                    </p>
+
+                </div>
+
+
+                <div class="appointment-count">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    <span>
+                        @(Model == null ? 0 : Model.Count)
+                    </span>
+
+                    Appointments
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =====================================================
+                 APPOINTMENT CARD
+            ====================================================== -->
+
+            <div class="appointment-card">
+
+                <div class="table-wrapper">
+
+                    @if (Model != null && Model.Count > 0)
+                    {
+                        <table>
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>#</th>
+
+                                    <th>Patient</th>
+
+                                    <th>Email</th>
+
+                                    <th>Date</th>
+
+                                    <th>Time</th>
+
+                                    <th>Reason</th>
+
+                                    <th>Status</th>
+
+                                    <th>Manage</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+
+                                @Html.Raw(tableRows.ToString())
+
+                            </tbody>
+
+                        </table>
+                    }
+                    else
+                    {
+                        <div class="empty-state">
+
+                            <div class="empty-icon">
+
+                                <i class="fa-solid fa-calendar-xmark"></i>
+
+                            </div>
+
+                            <h3>
+                                No Appointments
+                            </h3>
+
+                            <p>
+                                You don't have any appointments yet.
+                            </p>
+
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+                © 2026 CarePlus. All rights reserved.
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+   
+
+    <div id="cancelModal"
+         class="cancel-modal">
+
+        <div class="cancel-box">
+
+
+            <div class="cancel-header">
+
+                <div>
+
+                    <h3>
+                        Cancel Appointment
+                    </h3>
+
+                    <p>
+                        Please provide a reason for cancellation.
+                    </p>
+
+                </div>
+
+
+                <button type="button"
+                        id="closeCancelButton"
+                        class="modal-close-button">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+
+
+            <form method="post"
+                  action="@Url.Action("CancelAppointment","Doctor")">
+
+
+                <input type="hidden"
+                       id="cancelAppointmentId"
+                       name="appointmentId" />
+
+
+                <label for="cancelReason">
+                    Cancellation Reason
+                </label>
+
+
+                <textarea id="cancelReason"
+                          name="cancelReason"
+                          placeholder="Enter cancellation reason..."
+                          maxlength="500"
+                          required></textarea>
+
+
+                <div class="cancel-actions">
+
+
+                    <button type="button"
+                            id="closeCancelButton2"
+                            class="close-btn">
+
+                        Close
+
+                    </button>
+
+
+                    <button type="submit"
+                            class="confirm-cancel-btn">
+
+                        <i class="fa-solid fa-xmark"></i>
+
+                        Cancel Appointment
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+                document.addEventListener("DOMContentLoaded", function () {
+
+                    /* ============================================
+                       CANCEL BUTTONS
+                    ============================================ */
+
+                    var cancelButtons =
+                        document.querySelectorAll(".cancel-open-btn");
+
+
+                    cancelButtons.forEach(function (button) {
+
+                        button.addEventListener("click", function () {
+
+                            var appointmentId =
+                                this.getAttribute("data-id");
+
+
+                            document.getElementById(
+                                "cancelAppointmentId"
+                            ).value = appointmentId;
+
+
+                            document.getElementById(
+                                "cancelReason"
+                            ).value = "";
+
+
+                            document.getElementById(
+                                "cancelModal"
+                            ).style.display = "flex";
+
+
+                            document.getElementById(
+                                "cancelReason"
+                            ).focus();
+
+                        });
+
+                    });
+
+
+
+                    /* ============================================
+                       CLOSE BUTTON
+                    ============================================ */
+
+                    document.getElementById(
+                        "closeCancelButton"
+                    ).addEventListener("click", function () {
+
+                        document.getElementById(
+                            "cancelModal"
+                        ).style.display = "none";
+
+                    });
+
+
+
+                    /* ============================================
+                       CLOSE BUTTON 2
+                    ============================================ */
+
+                    document.getElementById(
+                        "closeCancelButton2"
+                    ).addEventListener("click", function () {
+
+                        document.getElementById(
+                            "cancelModal"
+                        ).style.display = "none";
+
+                    });
+
+
+
+                    /* ============================================
+                       CLICK OUTSIDE MODAL
+                    ============================================ */
+
+                    document.getElementById(
+                        "cancelModal"
+                    ).addEventListener("click", function (event) {
+
+                        if (event.target === this) {
+
+                            this.style.display = "none";
+
+                        }
+
+                    });
+
+
+
+                    /* ============================================
+                       ESC KEY
+                    ============================================ */
+
+                    document.addEventListener("keydown", function (event) {
+
+                        if (event.key === "Escape") {
+
+                            document.getElementById(
+                                "cancelModal"
+                            ).style.display = "none";
+
+                        }
+
+                    });
+
+                });
+
+    </script>
+
+
+</body>
+
+</html>

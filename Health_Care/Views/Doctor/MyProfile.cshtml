@@ -1,0 +1,753 @@
+﻿@model Health_Care.Models.Doctor
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>My Profile - CarePlus</title>
+
+    <link rel="stylesheet"
+          href="~/Content/doctor-profile.css" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         SUCCESS ALERT
+    ====================================================== -->
+
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert-message"
+             id="successAlert">
+
+            <i class="fa-solid fa-circle-check"></i>
+
+            <span>
+                @TempData["SuccessMessage"]
+            </span>
+
+            <button type="button"
+                    onclick="closeAlert()">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+    }
+
+
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+
+        <!-- LOGO -->
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                +
+            </div>
+
+            <span>
+                CarePlus
+            </span>
+
+        </div>
+
+
+
+        <!-- DOCTOR PROFILE -->
+
+        <div class="doctor-mini-profile">
+
+            <div class="doctor-avatar">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Dr. @Model.FirstName @Model.LastName
+                </h3>
+
+                <p>
+                    @Model.Specialization
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <!-- DASHBOARD -->
+
+            <a href="@Url.Action("Doctordashboard","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+
+            <!-- APPOINTMENTS -->
+
+            <a href="@Url.Action("Appointments","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>
+                    Appointments
+                </span>
+
+            </a>
+
+
+
+            <!-- MY PATIENTS -->
+
+            <a href="@Url.Action("MyPatients","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+                    My Patients
+                </span>
+
+            </a>
+
+
+
+            <!-- MY PROFILE -->
+
+            <a href="@Url.Action("MyProfile","Doctor")"
+               class="menu-item active">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+        </nav>
+
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="@Url.Action("Logout","Doctor")"
+               class="logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+    ====================================================== -->
+
+    <main class="main-content">
+
+
+
+        <!-- =================================================
+             TOPBAR
+        ================================================== -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p>
+                    Manage your personal and professional information.
+                </p>
+
+            </div>
+
+
+
+            <div class="top-profile">
+
+
+                <div class="small-avatar">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Dr. @Model.FirstName @Model.LastName
+                    </strong>
+
+                    <span>
+                        @Model.Specialization
+                    </span>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =================================================
+             PROFILE CONTENT
+        ================================================== -->
+
+        <section class="profile-container">
+
+
+
+            <!-- =================================================
+                 PROFILE HEADER
+            ================================================== -->
+
+            <div class="profile-header">
+
+
+                <div class="profile-avatar">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                </div>
+
+
+
+                <div class="profile-heading">
+
+                    <h2>
+                        Dr. @Model.FirstName @Model.LastName
+                    </h2>
+
+                    <p>
+                        @Model.Specialization
+                    </p>
+
+                    <span>
+                        @Model.Department
+                    </span>
+
+                </div>
+
+
+
+                <!-- EDIT BUTTON -->
+
+                <button type="button"
+                        class="edit-profile-btn"
+                        onclick="enableEdit()">
+
+                    <i class="fa-solid fa-pen"></i>
+
+                    Edit Profile
+
+                </button>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 UPDATE FORM
+            ================================================== -->
+
+            <form method="post"
+                  action="@Url.Action("UpdateProfile","Doctor")"
+                  onsubmit="return confirmUpdate();">
+
+
+
+                <!-- =================================================
+                     PERSONAL INFORMATION
+                ================================================== -->
+
+                <div class="profile-card">
+
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-user"></i>
+
+                        <h2>
+                            Personal Information
+                        </h2>
+
+                    </div>
+
+
+
+                    <div class="profile-grid">
+
+
+
+                        <!-- FIRST NAME -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                First Name
+                            </label>
+
+                            <input type="text"
+                                   name="FirstName"
+                                   value="@Model.FirstName"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- LAST NAME -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Last Name
+                            </label>
+
+                            <input type="text"
+                                   name="LastName"
+                                   value="@Model.LastName"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- GENDER -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Gender
+                            </label>
+
+                            <select name="Gender"
+                                    class="profile-input"
+                                    disabled
+                                    required>
+
+                                <option value="Male"
+                                        @(Model.Gender == "Male" ? "selected" : "")>
+                                    Male
+                                </option>
+
+                                <option value="Female"
+                                        @(Model.Gender == "Female" ? "selected" : "")>
+                                    Female
+                                </option>
+
+                                <option value="Other"
+                                        @(Model.Gender == "Other" ? "selected" : "")>
+                                    Other
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+
+                        <!-- MOBILE -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Mobile Number
+                            </label>
+
+                            <input type="text"
+                                   name="MobileNumber"
+                                   value="@Model.MobileNumber"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- EMAIL -->
+
+                        <div class="profile-field full">
+
+                            <label>
+                                Email
+                            </label>
+
+                            <input type="email"
+                                   name="Email"
+                                   value="@Model.Email"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- ADDRESS -->
+
+                        <div class="profile-field full">
+
+                            <label>
+                                Address
+                            </label>
+
+                            <textarea name="Address"
+                                      class="profile-input"
+                                      disabled
+                                      required>@Model.Address</textarea>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     PROFESSIONAL INFORMATION
+                ================================================== -->
+
+                <div class="profile-card">
+
+
+                    <div class="card-title">
+
+                        <i class="fa-solid fa-stethoscope"></i>
+
+                        <h2>
+                            Professional Information
+                        </h2>
+
+                    </div>
+
+
+
+                    <div class="profile-grid">
+
+
+
+                        <!-- SPECIALIZATION -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Specialization
+                            </label>
+
+                            <input type="text"
+                                   name="Specialization"
+                                   value="@Model.Specialization"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- DEPARTMENT -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Department
+                            </label>
+
+                            <input type="text"
+                                   name="Department"
+                                   value="@Model.Department"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- EXPERIENCE -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Experience
+                            </label>
+
+                            <input type="number"
+                                   name="Experience"
+                                   value="@Model.Experience"
+                                   class="profile-input"
+                                   disabled
+                                   min="0"
+                                   required />
+
+                        </div>
+
+
+
+                        <!-- QUALIFICATION -->
+
+                        <div class="profile-field">
+
+                            <label>
+                                Qualification
+                            </label>
+
+                            <input type="text"
+                                   name="Qualification"
+                                   value="@Model.Qualification"
+                                   class="profile-input"
+                                   disabled
+                                   required />
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- =================================================
+                     UPDATE BUTTONS
+                ================================================== -->
+
+                <div class="update-area"
+                     id="updateArea">
+
+
+                    <!-- UPDATE -->
+
+                    <button type="submit"
+                            class="update-btn">
+
+                        <i class="fa-solid fa-floppy-disk"></i>
+
+                        Update Profile
+
+                    </button>
+
+
+
+                    <!-- CANCEL -->
+
+                    <button type="button"
+                            class="cancel-btn"
+                            onclick="cancelEdit()">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer>
+
+            <p>
+
+                © 2026 CarePlus Healthcare.
+                All rights reserved.
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script>
+
+
+                /* =================================================
+                   ENABLE EDIT
+                ================================================== */
+
+                function enableEdit()
+                {
+
+                    var fields =
+                        document.querySelectorAll(".profile-input");
+
+
+                    fields.forEach(function (field)
+                    {
+
+                        field.disabled = false;
+
+                    });
+
+
+                    document.getElementById("updateArea")
+                        .classList.add("show");
+
+                }
+
+
+
+                /* =================================================
+                   CONFIRM UPDATE
+                ================================================== */
+
+                function confirmUpdate()
+                {
+
+                    var result = confirm(
+                        "Are you sure you want to update your profile?"
+                    );
+
+
+                    if (result)
+                    {
+
+                        return true;
+
+                    }
+                    else
+                    {
+
+                        return false;
+
+                    }
+
+                }
+
+
+
+                /* =================================================
+                   CANCEL EDIT
+                ================================================== */
+
+                function cancelEdit()
+                {
+
+                    location.reload();
+
+                }
+
+
+
+                /* =================================================
+                   CLOSE SUCCESS ALERT
+                ================================================== */
+
+                function closeAlert()
+                {
+
+                    var alertBox =
+                        document.getElementById("successAlert");
+
+
+                    if (alertBox != null)
+                    {
+
+                        alertBox.remove();
+
+                    }
+
+                }
+
+
+
+                /* =================================================
+                   AUTO CLOSE SUCCESS ALERT
+                ================================================== */
+
+                setTimeout(function ()
+                {
+
+                    closeAlert();
+
+                }, 4000);
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,233 @@
+﻿@model List<Health_Care.Models.Appointment>
+
+@{
+    Layout = null;
+
+    string adminName =
+        Session["AdminName"] != null
+        ? Session["AdminName"].ToString()
+        : "Admin";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Appointments - CarePlus Admin</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/Content/admin-appointments.css" />
+
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            CarePlus
+        </div>
+
+        <nav>
+
+            <a href="@Url.Action("Dashboard","Admin")">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard
+            </a>
+
+            <a href="@Url.Action("Patients","Admin")">
+                <i class="fa-solid fa-users"></i>
+                Patients
+            </a>
+
+            <a href="@Url.Action("Doctors","Admin")">
+                <i class="fa-solid fa-user-doctor"></i>
+                Doctors
+            </a>
+
+            <a href="@Url.Action("Appointments","Admin")"
+               class="active">
+                <i class="fa-solid fa-calendar-check"></i>
+                Appointments
+            </a>
+
+            <a href="@Url.Action("Profile","Admin")">
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </a>
+
+            <a href="@Url.Action("Logout","Admin")">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Appointments</h1>
+
+                <p>View all patient appointments</p>
+
+            </div>
+
+            <div class="admin-name">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+                @adminName
+
+            </div>
+
+        </header>
+
+
+        <section class="content-card">
+
+            <div class="section-title">
+
+                <h2>All Appointments</h2>
+
+                <p>
+                    Total:
+                    <strong>@Model.Count</strong>
+                </p>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+                            <th>Patient</th>
+                            <th>Email</th>
+                            <th>Doctor</th>
+                            <th>Specialization</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Reason</th>
+                            <th>Status</th>
+                            <th>Cancel Reason</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    #@item.AppointmentId
+                                </td>
+
+                                <td>
+                                    <strong>
+                                        @item.FirstName
+                                        @item.LastName
+                                    </strong>
+                                </td>
+
+                                <td>
+                                    @item.Email
+                                </td>
+
+                                <td>
+                                    Dr. @item.DoctorName
+                                </td>
+
+                                <td>
+                                    @item.Specialization
+                                </td>
+
+                                <td>
+                                    @item.AppointmentDate.ToString("dd-MM-yyyy")
+                                </td>
+
+                                <td>
+                                    @item.AppointmentTime
+                                </td>
+
+                                <td>
+                                    @item.Reason
+                                </td>
+
+                                <td>
+
+                                    <span class="status @item.Status.ToLower()">
+
+                                        @item.Status
+
+                                    </span>
+
+                                </td>
+
+                                <td>
+
+                                    @if (item.Status == "Cancelled")
+                                    {
+                                        if (!string.IsNullOrEmpty(item.CancelReason))
+                                        {
+                                            <span class="cancel-reason">
+                                                @item.CancelReason
+                                            </span>
+                                        }
+                                        else
+                                        {
+                                            <span class="no-reason">
+                                                No reason
+                                            </span>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <span class="no-reason">
+                                            -
+                                        </span>
+                                    }
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

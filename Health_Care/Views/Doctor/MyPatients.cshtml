@@ -1,0 +1,540 @@
+﻿@model List<Health_Care.Models.PatientDetails>
+
+@{
+    Layout = null;
+
+    string doctorName =
+        Session["DoctorFN"] != null
+        ? Session["DoctorFN"].ToString()
+        : "Doctor";
+
+    string doctorLastName =
+        Session["DoctorLN"] != null
+        ? Session["DoctorLN"].ToString()
+        : "";
+
+    string specialization =
+        Session["Specialization"] != null
+        ? Session["Specialization"].ToString()
+        : "Medical Specialist";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        My Patients - CarePlus
+    </title>
+
+
+    <link rel="stylesheet"
+          href="~/Content/my-patients.css" />
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+</head>
+
+
+<body>
+
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                +
+            </div>
+
+            <span>
+                CarePlus
+            </span>
+
+        </div>
+
+
+        <!-- DOCTOR PROFILE -->
+
+        <div class="doctor-mini-profile">
+
+
+            <div class="doctor-avatar">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Dr. @doctorName @doctorLastName
+                </h3>
+
+                <p>
+                    @specialization
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <a href="@Url.Action("Doctordashboard","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="\Doctor\Appointments"
+               class="menu-item">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>
+                    Appointments
+                </span>
+
+            </a>
+
+
+            <a href="@Url.Action("MyPatients","Doctor")"
+               class="menu-item active">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+                    My Patients
+                </span>
+
+            </a>
+
+
+            <a href="@Url.Action("MyProfile","Doctor")"
+               class="menu-item">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+
+            <a href="@Url.Action("Logout","Doctor")"
+               class="logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1>
+                    My Patients
+                </h1>
+
+                <p>
+                    Complete information of your patients
+                </p>
+
+            </div>
+
+
+            <div class="top-profile">
+
+
+                <div class="small-avatar">
+
+                    <i class="fa-solid fa-user-doctor"></i>
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+                        Dr. @doctorName @doctorLastName
+                    </strong>
+
+                    <span>
+                        @specialization
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </header>
+
+
+        <!-- PATIENT CONTENT -->
+
+        <section class="patients-container">
+
+
+            <!-- PAGE HEADER -->
+
+            <div class="page-header">
+
+
+                <div>
+
+                    <h2>
+                        Patient Information
+                    </h2>
+
+                    <p>
+                        All patients who have appointments with you
+                    </p>
+
+                </div>
+
+
+                <div class="patient-count">
+
+                    <i class="fa-solid fa-users"></i>
+
+                    <span>
+                        @Model.Count Patients
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- PATIENT CARD -->
+
+            <div class="patients-card">
+
+
+                @if (Model != null && Model.Count > 0)
+                {
+
+
+                    foreach (var patient in Model)
+                    {
+
+
+                        <div class="patient-card">
+
+
+                            <!-- PATIENT HEADER -->
+
+                            <div class="patient-header">
+
+
+                                <div class="patient-avatar">
+
+
+                                    @{
+                                        string firstInitial = "";
+                                        string lastInitial = "";
+
+                                        if (!string.IsNullOrEmpty(patient.FirstName))
+                                        {
+                                            firstInitial =
+                                                patient.FirstName
+                                                .Substring(0, 1)
+                                                .ToUpper();
+                                        }
+
+                                        if (!string.IsNullOrEmpty(patient.LastName))
+                                        {
+                                            lastInitial =
+                                                patient.LastName
+                                                .Substring(0, 1)
+                                                .ToUpper();
+                                        }
+                                    }
+
+
+                                    @firstInitial@lastInitial
+
+
+                                </div>
+
+
+                                <div class="patient-name">
+
+
+                                    <h3>
+                                        @patient.FirstName
+                                        @patient.LastName
+                                    </h3>
+
+
+                                    <p>
+                                        <i class="fa-solid fa-envelope"></i>
+
+                                        @patient.Email
+                                    </p>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                            <!-- PATIENT INFORMATION -->
+
+                            <div class="patient-information">
+
+
+                                <div class="info-box">
+
+                                    <i class="fa-solid fa-calendar"></i>
+
+                                    <div>
+
+                                        <label>
+                                            Date of Birth
+                                        </label>
+
+                                        <p>
+                                            @patient.DateOfBirth.ToString("dd-MM-yyyy")
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <i class="fa-solid fa-venus-mars"></i>
+
+                                    <div>
+
+                                        <label>
+                                            Gender
+                                        </label>
+
+                                        <p>
+                                            @patient.Gender
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <i class="fa-solid fa-droplet"></i>
+
+                                    <div>
+
+                                        <label>
+                                            Blood Group
+                                        </label>
+
+                                        <p>
+                                            @patient.BloodGroup
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <i class="fa-solid fa-phone"></i>
+
+                                    <div>
+
+                                        <label>
+                                            Mobile Number
+                                        </label>
+
+                                        <p>
+                                            @patient.MobileNumber
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <i class="fa-solid fa-envelope"></i>
+
+                                    <div>
+
+                                        <label>
+                                            Email
+                                        </label>
+
+                                        <p>
+                                            @patient.Email
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box">
+
+                                    <i class="fa-solid fa-city"></i>
+
+                                    <div>
+
+                                        <label>
+                                            City
+                                        </label>
+
+                                        <p>
+                                            @patient.City
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="info-box address-box">
+
+                                    <i class="fa-solid fa-location-dot"></i>
+
+                                    <div>
+
+                                        <label>
+                                            Address
+                                        </label>
+
+                                        <p>
+                                            @patient.Address
+                                        </p>
+
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    }
+
+
+                }
+                else
+                {
+
+
+                    <!-- EMPTY -->
+
+                    <div class="empty-state">
+
+
+                        <div class="empty-icon">
+
+                            <i class="fa-solid fa-user-group"></i>
+
+                        </div>
+
+
+                        <h2>
+                            No Patients Found
+                        </h2>
+
+
+                        <p>
+                            You don't have any patients yet.
+                        </p>
+
+
+                    </div>
+
+
+                }
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            © 2026 CarePlus Healthcare.
+            All rights reserved.
+
+        </footer>
+
+
+    </main>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1760 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>CarePlus | Healthcare Management System</title>
+
+
+    <!-- Google Fonts -->
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap"
+          rel="stylesheet">
+
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+          href="~/Content/Style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         NAVBAR
+    ====================================================== -->
+
+    <header class="navbar">
+
+        <div class="container nav-container">
+
+
+            <!-- LOGO -->
+
+            <a href="#home"
+               class="logo">
+
+                <span class="logo-icon">
+
+                    <i class="fa-solid fa-heart-pulse"></i>
+
+                </span>
+
+                <span>
+                    Care<span>Plus</span>
+                </span>
+
+            </a>
+
+
+            <!-- NAVIGATION -->
+
+            <nav class="nav-links">
+
+                <a href="#home"
+                   class="active">
+                    Home
+                </a>
+
+                <a href="#services">
+                    Services
+                </a>
+
+                <a href="#features">
+                    Features
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+                <a href="#contact">
+                    Contact
+                </a>
+
+            </nav>
+
+
+            <!-- ACTIONS -->
+
+            <div class="nav-actions">
+
+                <a href="@Url.Action("Loginform", "Home")"
+                   class="login-btn">
+
+                    Login
+
+                </a>
+
+                <a href="\Home\BookAppointment"
+                   class="nav-button">
+
+                    Book Appointment
+
+                </a>
+
+            </div>
+
+
+            <!-- MOBILE MENU -->
+
+            <button class="menu-btn">
+
+                <i class="fa-solid fa-bars"></i>
+
+            </button>
+
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO SECTION
+    ====================================================== -->
+
+    <section class="hero"
+             id="home">
+
+
+        <div class="hero-bg-circle circle-one"></div>
+
+        <div class="hero-bg-circle circle-two"></div>
+
+
+        <div class="container hero-container">
+
+
+            <!-- HERO CONTENT -->
+
+            <div class="hero-content">
+
+
+                <div class="hero-badge">
+
+                    <span class="badge-dot"></span>
+
+                    Trusted Healthcare Platform
+
+                </div>
+                <h2>
+                    Wel-Come
+                    <span>@Session["FN"]</span>
+                    <span>@Session["LN"]</span>
+                </h2>
+
+                <h1>
+
+                    Smarter Healthcare.
+
+                    <span>
+                        Better Care.
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Manage appointments, health records,
+                    consultations and your healthcare journey
+                    from one simple and secure platform.
+
+                </p>
+
+
+                <div class="hero-buttons">
+
+
+                    <a href="#"
+                       class="primary-btn">
+
+                        Book an Appointment
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a href="#services"
+                       class="secondary-btn">
+
+                        <i class="fa-regular fa-circle-play"></i>
+
+                        Explore Services
+
+                    </a>
+
+
+                </div>
+
+
+                <!-- TRUST -->
+
+                <div class="hero-trust">
+
+
+                    <div class="avatars">
+
+                        <div class="avatar">
+                            A
+                        </div>
+
+                        <div class="avatar">
+                            R
+                        </div>
+
+                        <div class="avatar">
+                            S
+                        </div>
+
+                        <div class="avatar">
+                            P
+                        </div>
+
+                    </div>
+
+
+                    <div>
+
+                        <div class="stars">
+                            ★★★★★
+                        </div>
+
+                        <p>
+                            Trusted by 10,000+ patients
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 HEALTHCARE DASHBOARD VISUAL
+            ================================================== -->
+
+            <div class="hero-visual">
+
+
+                <!-- MAIN DASHBOARD -->
+
+                <div class="health-dashboard-card">
+
+
+                    <!-- Dashboard Header -->
+
+                    <div class="health-dashboard-header">
+
+
+                        <div class="dashboard-brand">
+
+
+                            <div class="dashboard-brand-icon">
+
+                                <i class="fa-solid fa-heart-pulse"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    My Health
+                                </strong>
+
+                                <span>
+                                    Health Dashboard
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="notification-icon">
+
+                            <i class="fa-regular fa-bell"></i>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- Welcome -->
+
+                    <div class="dashboard-welcome">
+
+
+                        <div>
+
+                            <span>
+                                Welcome back 👋
+                            </span>
+
+                            <h3>
+                                Good Morning, Alex
+                            </h3>
+
+                        </div>
+
+
+                        <div class="profile-mini">
+                            A
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- HEALTH OVERVIEW -->
+
+                    <div class="health-overview">
+
+
+                        <div class="overview-title">
+
+                            <strong>
+                                Health Overview
+                            </strong>
+
+                            <span>
+                                Today
+                            </span>
+
+                        </div>
+
+
+                        <div class="health-overview-grid">
+
+
+                            <!-- HEART RATE -->
+
+                            <div class="health-status-card">
+
+
+                                <div class="status-top">
+
+
+                                    <div class="status-icon heart-icon">
+
+                                        <i class="fa-solid fa-heart-pulse"></i>
+
+                                    </div>
+
+
+                                    <span class="status-good">
+                                        Normal
+                                    </span>
+
+
+                                </div>
+
+
+                                <p>
+                                    Heart Rate
+                                </p>
+
+
+                                <h3>
+
+                                    72
+
+                                    <small>
+                                        BPM
+                                    </small>
+
+                                </h3>
+
+
+                                <div class="mini-progress">
+
+                                    <span style="width:72%;"></span>
+
+                                </div>
+
+
+                            </div>
+
+
+
+                            <!-- BLOOD PRESSURE -->
+
+                            <div class="health-status-card">
+
+
+                                <div class="status-top">
+
+
+                                    <div class="status-icon pressure-icon">
+
+                                        <i class="fa-solid fa-droplet"></i>
+
+                                    </div>
+
+
+                                    <span class="status-good">
+                                        Healthy
+                                    </span>
+
+
+                                </div>
+
+
+                                <p>
+                                    Blood Pressure
+                                </p>
+
+
+                                <h3>
+                                    120/80
+                                </h3>
+
+
+                                <div class="mini-progress pressure-progress">
+
+                                    <span style="width:65%;"></span>
+
+                                </div>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- UPCOMING APPOINTMENT -->
+
+                    <div class="next-appointment">
+
+
+                        <div class="appointment-heading">
+
+
+                            <div>
+
+                                <span>
+                                    UPCOMING
+                                </span>
+
+                                <h4>
+                                    Next Appointment
+                                </h4>
+
+                            </div>
+
+
+                            <div class="calendar-small">
+
+                                <i class="fa-regular fa-calendar"></i>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="appointment-details">
+
+
+                            <div class="appointment-avatar">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+
+                            <div class="appointment-person">
+
+                                <strong>
+                                    Health Consultation
+                                </strong>
+
+                                <span>
+                                    Today • 10:30 AM
+                                </span>
+
+                            </div>
+
+
+                            <div class="appointment-arrow">
+
+                                <i class="fa-solid fa-chevron-right"></i>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <!-- BOTTOM DASHBOARD -->
+
+                    <div class="dashboard-bottom">
+
+
+                        <div class="bottom-item">
+
+
+                            <div class="bottom-icon blue-bottom">
+
+                                <i class="fa-solid fa-file-medical"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    12
+                                </strong>
+
+                                <span>
+                                    Health Records
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="bottom-item">
+
+
+                            <div class="bottom-icon green-bottom">
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                            </div>
+
+
+                            <div>
+
+                                <strong>
+                                    08
+                                </strong>
+
+                                <span>
+                                    Appointments
+                                </span>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FLOATING SECURITY CARD -->
+
+                <div class="floating-card security-card">
+
+
+                    <div class="floating-icon green">
+
+                        <i class="fa-solid fa-shield-heart"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Data Protected
+                        </strong>
+
+                        <small>
+                            Secure & Private
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FLOATING SUCCESS CARD -->
+
+                <div class="floating-notification">
+
+
+                    <div class="notification-check">
+
+                        <i class="fa-solid fa-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Appointment Confirmed
+                        </strong>
+
+                        <small>
+                            Your booking is successful
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         STATS
+    ====================================================== -->
+
+    <section class="stats">
+
+
+        <div class="container stats-container">
+
+
+            <div class="stat-item">
+
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        25K+
+                    </h3>
+
+                    <p>
+                        Happy Patients
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="stat-item">
+
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-hospital"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        120+
+                    </h3>
+
+                    <p>
+                        Partner Hospitals
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="stat-item">
+
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        50K+
+                    </h3>
+
+                    <p>
+                        Appointments
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="stat-item">
+
+
+                <div class="stat-icon">
+
+                    <i class="fa-solid fa-location-dot"></i>
+
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        50+
+                    </h3>
+
+                    <p>
+                        Cities Covered
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SERVICES
+    ====================================================== -->
+
+    <section class="services section"
+             id="services">
+
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+
+                <div class="section-label">
+                    OUR SERVICES
+                </div>
+
+
+                <h2>
+
+                    Everything You Need for
+
+                    <span>
+                        Better Healthcare
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Manage your healthcare journey with
+                    simple and powerful digital healthcare services.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="service-grid">
+
+
+                <!-- SERVICE 1 -->
+
+                <div class="service-card">
+
+
+                    <div class="service-icon blue">
+
+                        <i class="fa-solid fa-calendar-check"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Online Appointments
+                    </h3>
+
+
+                    <p>
+
+                        Book and manage healthcare appointments
+                        quickly from anywhere.
+
+                    </p>
+
+
+                    <a href="#">
+
+                        Book Appointment
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- SERVICE 2 -->
+
+                <div class="service-card featured">
+
+
+                    <div class="service-icon green">
+
+                        <i class="fa-solid fa-file-medical"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Health Records
+                    </h3>
+
+
+                    <p>
+
+                        Store and access your medical reports,
+                        prescriptions and health history securely.
+
+                    </p>
+
+
+                    <a href="#">
+
+                        View Records
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- SERVICE 3 -->
+
+                <div class="service-card">
+
+
+                    <div class="service-icon purple">
+
+                        <i class="fa-solid fa-video"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Online Consultation
+                    </h3>
+
+
+                    <p>
+
+                        Connect through secure online healthcare
+                        consultations without unnecessary travel.
+
+                    </p>
+
+
+                    <a href="#">
+
+                        Consult Now
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+
+
+                <!-- SERVICE 4 -->
+
+                <div class="service-card">
+
+
+                    <div class="service-icon orange">
+
+                        <i class="fa-solid fa-prescription-bottle-medical"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Digital Prescriptions
+                    </h3>
+
+
+                    <p>
+
+                        Keep your prescriptions organized and
+                        easily accessible whenever required.
+
+                    </p>
+
+
+                    <a href="#">
+
+                        Manage
+
+                        <i class="fa-solid fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FEATURES
+    ====================================================== -->
+
+    <section class="features section"
+             id="features">
+
+
+        <div class="container feature-container">
+
+
+            <!-- DASHBOARD -->
+
+            <div class="feature-visual">
+
+
+                <div class="feature-dashboard">
+
+
+                    <div class="feature-dashboard-header">
+
+
+                        <div class="mini-logo">
+
+                            <i class="fa-solid fa-heart-pulse"></i>
+
+                            CarePlus
+
+                        </div>
+
+
+                        <div class="mini-user">
+                            A
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="feature-dashboard-content">
+
+
+                        <span class="small-label">
+                            HEALTH SUMMARY
+                        </span>
+
+
+                        <h3>
+                            Your Weekly Health
+                        </h3>
+
+
+
+                        <div class="health-chart">
+
+
+                            <div class="chart-grid-line line-a"></div>
+
+                            <div class="chart-grid-line line-b"></div>
+
+                            <div class="chart-grid-line line-c"></div>
+
+
+                            <div class="chart-bars">
+
+
+                                <span style="height:45%;"></span>
+
+                                <span style="height:65%;"></span>
+
+                                <span style="height:52%;"></span>
+
+                                <span style="height:78%;"></span>
+
+                                <span style="height:62%;"></span>
+
+                                <span style="height:88%;"></span>
+
+                                <span style="height:72%;"></span>
+
+
+                            </div>
+
+
+                        </div>
+
+
+                        <div class="chart-days">
+
+                            <span>Mon</span>
+
+                            <span>Tue</span>
+
+                            <span>Wed</span>
+
+                            <span>Thu</span>
+
+                            <span>Fri</span>
+
+                            <span>Sat</span>
+
+                            <span>Sun</span>
+
+                        </div>
+
+
+
+                        <div class="feature-summary">
+
+
+                            <div>
+
+                                <span>
+                                    Health Score
+                                </span>
+
+                                <strong>
+                                    92%
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span>
+                                    Wellness
+                                </span>
+
+                                <strong>
+                                    Excellent
+                                </strong>
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- FEATURE CONTENT -->
+
+            <div class="feature-content">
+
+
+                <div class="section-label">
+                    POWERFUL PLATFORM
+                </div>
+
+
+                <h2>
+
+                    Healthcare Management
+
+                    <span>
+                        Made Simple
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    CarePlus brings your healthcare information,
+                    appointments and records together in one
+                    secure and easy-to-use platform.
+
+                </p>
+
+
+
+                <div class="feature-list">
+
+
+                    <div class="feature-item">
+
+
+                        <div class="check-icon">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h4>
+                                Centralized Health Records
+                            </h4>
+
+                            <p>
+                                Access important medical information
+                                securely whenever you need it.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="feature-item">
+
+
+                        <div class="check-icon">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h4>
+                                Smart Appointment Management
+                            </h4>
+
+                            <p>
+                                Schedule and manage appointments
+                                without unnecessary waiting.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+
+                    <div class="feature-item">
+
+
+                        <div class="check-icon">
+
+                            <i class="fa-solid fa-check"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <h4>
+                                Secure Healthcare Data
+                            </h4>
+
+                            <p>
+                                Your personal healthcare information
+                                remains private and protected.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <a href="#"
+                   class="primary-btn">
+
+                    Explore Platform
+
+                    <i class="fa-solid fa-arrow-right"></i>
+
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         WHY CAREPLUS
+    ====================================================== -->
+
+    <section class="health-features section">
+
+
+        <div class="container">
+
+
+            <div class="section-heading">
+
+
+                <div class="section-label">
+                    WHY CAREPLUS
+                </div>
+
+
+                <h2>
+
+                    Built Around
+
+                    <span>
+                        Your Health
+                    </span>
+
+                </h2>
+
+
+                <p>
+
+                    Everything you need for a smoother
+                    and smarter healthcare experience.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="health-feature-grid">
+
+
+                <div class="health-feature-card">
+
+
+                    <div class="large-icon blue-bg">
+
+                        <i class="fa-solid fa-lock"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Secure & Private
+                    </h3>
+
+
+                    <p>
+
+                        Your healthcare information is protected
+                        with modern security practices.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <div class="health-feature-card">
+
+
+                    <div class="large-icon green-bg">
+
+                        <i class="fa-solid fa-clock"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Save Your Time
+                    </h3>
+
+
+                    <p>
+
+                        Book appointments and manage healthcare
+                        information quickly and easily.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <div class="health-feature-card">
+
+
+                    <div class="large-icon purple-bg">
+
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+
+                    </div>
+
+
+                    <h3>
+                        Easy Access
+                    </h3>
+
+
+                    <p>
+
+                        Access your healthcare information
+                        whenever and wherever you need it.
+
+                    </p>
+
+
+                </div>
+
+
+
+                <div class="health-feature-card">
+
+
+                    <div class="large-icon orange-bg">
+
+                        <i class="fa-solid fa-headset"></i>
+
+                    </div>
+
+
+                    <h3>
+                        24/7 Support
+                    </h3>
+
+
+                    <p>
+
+                        Get assistance whenever you need help
+                        with your healthcare journey.
+
+                    </p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         CTA
+    ====================================================== -->
+
+    <section class="cta"
+             id="about">
+
+
+        <div class="container">
+
+
+            <div class="cta-box">
+
+
+                <div class="cta-content">
+
+
+                    <div class="section-label">
+                        YOUR HEALTH MATTERS
+                    </div>
+
+
+                    <h2>
+
+                        Take Control of Your
+
+                        <span>
+                            Health Today.
+                        </span>
+
+                    </h2>
+
+
+                    <p>
+
+                        Join thousands of users using CarePlus
+                        to make healthcare simpler, smarter
+                        and more connected.
+
+                    </p>
+
+
+                    <div class="cta-buttons">
+
+
+                        <a href="#"
+                           class="white-btn">
+
+                            Create Free Account
+
+                            <i class="fa-solid fa-arrow-right"></i>
+
+                        </a>
+
+
+                        <a href="#contact"
+                           class="outline-btn">
+
+                            Contact Us
+
+                        </a>
+
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="cta-icon">
+
+
+                    <div class="big-heart">
+
+                        <i class="fa-solid fa-heart-pulse"></i>
+
+                    </div>
+
+
+                    <div class="pulse pulse-one"></div>
+
+                    <div class="pulse pulse-two"></div>
+
+                    <div class="pulse pulse-three"></div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer"
+            id="contact">
+
+
+        <div class="container footer-container">
+
+
+            <!-- BRAND -->
+
+            <div class="footer-brand">
+
+
+                <a href="#home"
+                   class="logo">
+
+
+                    <span class="logo-icon">
+
+                        <i class="fa-solid fa-heart-pulse"></i>
+
+                    </span>
+
+
+                    <span>
+
+                        Care<span>Plus</span>
+
+                    </span>
+
+
+                </a>
+
+
+                <p>
+
+                    Making healthcare smarter,
+                    simpler and accessible for everyone.
+
+                </p>
+
+
+                <div class="socials">
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-facebook-f"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-instagram"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-linkedin-in"></i>
+
+                    </a>
+
+
+                    <a href="#">
+
+                        <i class="fa-brands fa-x-twitter"></i>
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PLATFORM -->
+
+            <div class="footer-column">
+
+
+                <h4>
+                    Platform
+                </h4>
+
+
+                <a href="#">
+                    Appointments
+                </a>
+
+                <a href="#">
+                    Health Records
+                </a>
+
+                <a href="#">
+                    Consultations
+                </a>
+
+                <a href="#">
+                    Prescriptions
+                </a>
+
+
+            </div>
+
+
+
+            <!-- COMPANY -->
+
+            <div class="footer-column">
+
+
+                <h4>
+                    Company
+                </h4>
+
+
+                <a href="#">
+                    About Us
+                </a>
+
+                <a href="#">
+                    Our Team
+                </a>
+
+                <a href="#">
+                    Careers
+                </a>
+
+                <a href="#">
+                    Contact
+                </a>
+
+
+            </div>
+
+
+
+            <!-- SUPPORT -->
+
+            <div class="footer-column">
+
+
+                <h4>
+                    Support
+                </h4>
+
+
+                <a href="#">
+                    Help Center
+                </a>
+
+                <a href="#">
+                    Privacy Policy
+                </a>
+
+                <a href="#">
+                    Terms
+                </a>
+
+                <a href="#">
+                    Security
+                </a>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="footer-bottom">
+
+
+            <div class="container">
+
+
+                <p>
+                    © 2026 CarePlus Healthcare.
+                    All rights reserved.
+                </p>
+
+
+                <p>
+
+                    Designed with
+
+                    <i class="fa-solid fa-heart"></i>
+
+                    for better healthcare.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+    </footer>
+
+
+</body>
+
+</html>
+```

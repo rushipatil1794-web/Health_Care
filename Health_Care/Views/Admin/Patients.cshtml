@@ -1,0 +1,380 @@
+﻿@model List<Health_Care.Models.patient>
+
+@{
+    Layout = null;
+
+    string adminName =
+        Session["AdminName"] != null
+        ? Session["AdminName"].ToString()
+        : "Admin";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>Patients - CarePlus Admin</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/Content/admin-patients.css" />
+
+</head>
+
+<body>
+
+    <!-- SIDEBAR -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            CarePlus
+        </div>
+
+        <nav>
+
+            <a href="@Url.Action("Dashboard","Admin")">
+                <i class="fa-solid fa-chart-pie"></i>
+                Dashboard
+            </a>
+
+            <a href="@Url.Action("Patients","Admin")"
+               class="active">
+                <i class="fa-solid fa-users"></i>
+                Patients
+            </a>
+
+            <a href="@Url.Action("Doctors","Admin")">
+                <i class="fa-solid fa-user-doctor"></i>
+                Doctors
+            </a>
+
+            <a href="@Url.Action("Appointments","Admin")">
+                <i class="fa-solid fa-calendar-check"></i>
+                Appointments
+            </a>
+
+            <a href="@Url.Action("Profile","Admin")">
+                <i class="fa-solid fa-user"></i>
+                My Profile
+            </a>
+
+            <a href="@Url.Action("Logout","Admin")">
+                <i class="fa-solid fa-right-from-bracket"></i>
+                Logout
+            </a>
+
+        </nav>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="main-content">
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Patients</h1>
+
+                <p>Manage registered patients</p>
+
+            </div>
+
+            <div class="admin-name">
+
+                <i class="fa-solid fa-user-shield"></i>
+
+                @adminName
+
+            </div>
+
+        </header>
+
+
+        <!-- CONTENT -->
+
+        <section class="content-card">
+
+            <div class="section-title">
+
+                <div>
+
+                    <h2>All Patients</h2>
+
+                    <p>
+                        Total Patients:
+                        <strong>@Model.Count</strong>
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- SUCCESS MESSAGE -->
+
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="success-message">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    <span>
+                        @TempData["SuccessMessage"]
+                    </span>
+
+                </div>
+            }
+
+
+            <!-- ERROR MESSAGE -->
+
+            @if (TempData["ErrorMessage"] != null)
+            {
+                <div class="error-message">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    <span>
+                        @TempData["ErrorMessage"]
+                    </span>
+
+                </div>
+            }
+
+
+            <!-- TABLE -->
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID</th>
+
+                            <th>Name</th>
+
+                            <th>Gender</th>
+
+                            <th>Date of Birth</th>
+
+                            <th>Blood Group</th>
+
+                            <th>Mobile</th>
+
+                            <th>Email</th>
+
+                            <th>City</th>
+
+                            <th>Address</th>
+
+                            <th>Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach (var p in Model)
+                        {
+                            <tr>
+
+                                <!-- ID -->
+
+                                <td>
+                                    @p.PatientId
+                                </td>
+
+
+                                <!-- NAME -->
+
+                                <td>
+
+                                    <strong>
+                                        @p.FirstName
+                                        @p.LastName
+                                    </strong>
+
+                                </td>
+
+
+                                <!-- GENDER -->
+
+                                <td>
+                                    @p.Gender
+                                </td>
+
+
+                                <!-- DOB -->
+
+                                <td>
+                                    @p.DateOfBirth.ToString("dd-MM-yyyy")
+                                </td>
+
+
+                                <!-- BLOOD GROUP -->
+
+                                <td>
+                                    @p.BloodGroup
+                                </td>
+
+
+                                <!-- MOBILE -->
+
+                                <td>
+                                    @p.MobileNumber
+                                </td>
+
+
+                                <!-- EMAIL -->
+
+                                <td>
+                                    @p.Email
+                                </td>
+
+
+                                <!-- CITY -->
+
+                                <td>
+                                    @p.City
+                                </td>
+
+
+                                <!-- ADDRESS -->
+
+                                <td>
+                                    @p.Address
+                                </td>
+
+
+                                <!-- ACTION -->
+
+                                <td>
+
+                                    <div class="action-buttons">
+
+
+                                        <!-- EDIT -->
+
+                                        <a href="@Url.Action(
+                                            "EditPatient",
+                                            "Admin",
+                                            new { patientId = p.PatientId }
+                                        )"
+                                           class="edit-btn">
+
+                                            <i class="fa-solid fa-pen"></i>
+
+                                            Edit
+
+                                        </a>
+
+
+                                        <!-- DELETE -->
+
+                                        <form method="post"
+                                              action="@Url.Action(
+                                                  "DeletePatient",
+                                                  "Admin"
+                                              )"
+                                              class="delete-form">
+
+                                            <input type="hidden"
+                                                   name="patientId"
+                                                   value="@p.PatientId" />
+
+
+                                            <button type="submit"
+                                                    class="delete-btn">
+
+                                                <i class="fa-solid fa-trash"></i>
+
+                                                Delete
+
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- DELETE CONFIRMATION -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            function () {
+
+                var deleteForms =
+                    document.querySelectorAll(
+                        ".delete-form"
+                    );
+
+                deleteForms.forEach(
+                    function (form) {
+
+                        form.addEventListener(
+                            "submit",
+                            function (event) {
+
+                                var result =
+                                    window.confirm(
+                                        "Are you sure you want to delete this patient?"
+                                    );
+
+                                if (!result) {
+
+                                    event.preventDefault();
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>

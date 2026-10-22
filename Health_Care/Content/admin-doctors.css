@@ -1,0 +1,670 @@
+﻿/* ========================= */
+/* RESET */
+/* ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f1f8f6;
+    color: #1e293b;
+}
+
+
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: #064e3b;
+    padding: 25px 15px;
+    z-index: 1000;
+}
+
+
+/* Logo */
+
+.logo {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 15px;
+    color: white;
+    font-size: 23px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+
+    .logo i {
+        color: #34d399;
+        font-size: 28px;
+    }
+
+
+
+/* Navigation */
+
+.sidebar nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+
+    .sidebar nav a {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 13px 16px;
+        color: #d1fae5;
+        text-decoration: none;
+        border-radius: 9px;
+        font-size: 14px;
+        font-weight: 500;
+        transition: 0.2s;
+    }
+
+
+        .sidebar nav a i {
+            width: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+
+        .sidebar nav a:hover {
+            background: #065f46;
+            color: white;
+        }
+
+
+        .sidebar nav a.active {
+            background: #10b981;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(16,185,129,.20);
+        }
+
+
+
+/* ========================= */
+/* MAIN CONTENT */
+/* ========================= */
+
+.main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+    padding: 30px;
+}
+
+
+
+/* ========================= */
+/* TOPBAR */
+/* ========================= */
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+
+.page-heading h1 {
+    font-size: 28px;
+    color: #064e3b;
+    margin-bottom: 6px;
+}
+
+
+.page-heading p {
+    color: #64748b;
+    font-size: 14px;
+}
+
+
+
+/* Admin Name */
+
+.admin-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,.06);
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+
+.admin-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #d1fae5;
+    color: #059669;
+}
+
+
+
+/* ========================= */
+/* SUCCESS MESSAGE */
+/* ========================= */
+
+.success-message {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    padding: 13px 16px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+    .success-message i {
+        font-size: 16px;
+    }
+
+
+
+/* ========================= */
+/* ERROR MESSAGE */
+/* ========================= */
+
+.error-message {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+    padding: 13px 16px;
+    border-radius: 9px;
+    margin-bottom: 20px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+
+    .error-message i {
+        font-size: 16px;
+    }
+
+
+
+/* ========================= */
+/* CONTENT CARD */
+/* ========================= */
+
+.content-card {
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.06);
+}
+
+
+
+/* ========================= */
+/* SECTION HEADER */
+/* ========================= */
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 20px;
+}
+
+
+    .section-header h2 {
+        font-size: 20px;
+        color: #064e3b;
+        margin-bottom: 5px;
+    }
+
+
+    .section-header p {
+        color: #64748b;
+        font-size: 13px;
+    }
+
+
+
+/* ========================= */
+/* DOCTOR COUNT */
+/* ========================= */
+
+.doctor-count {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    background: #ecfdf5;
+    border: 1px solid #d1fae5;
+    padding: 10px 15px;
+    border-radius: 9px;
+    color: #047857;
+    font-size: 13px;
+}
+
+
+    .doctor-count i {
+        font-size: 16px;
+    }
+
+
+    .doctor-count strong {
+        background: #059669;
+        color: white;
+        padding: 4px 9px;
+        border-radius: 6px;
+        font-size: 12px;
+    }
+
+
+
+/* ========================= */
+/* TABLE WRAPPER */
+/* ========================= */
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+}
+
+
+
+/* ========================= */
+/* TABLE */
+/* ========================= */
+
+table {
+    width: 100%;
+    min-width: 1250px;
+    border-collapse: collapse;
+}
+
+
+thead {
+    background: #f0fdf4;
+}
+
+
+    thead th {
+        padding: 14px 15px;
+        text-align: left;
+        color: #065f46;
+        font-size: 12px;
+        font-weight: 700;
+        border-bottom: 1px solid #d1fae5;
+        white-space: nowrap;
+    }
+
+
+tbody td {
+    padding: 15px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 13px;
+    color: #475569;
+    vertical-align: middle;
+}
+
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+
+
+/* ========================= */
+/* DOCTOR ID */
+/* ========================= */
+
+.doctor-id {
+    background: #ecfdf5;
+    color: #047857;
+    padding: 5px 8px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+
+
+/* ========================= */
+/* DOCTOR NAME */
+/* ========================= */
+
+.doctor-name {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 180px;
+}
+
+
+.doctor-avatar {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #d1fae5;
+    color: #059669;
+    font-size: 15px;
+}
+
+
+.doctor-name strong {
+    display: block;
+    color: #1e293b;
+    font-size: 13px;
+    white-space: nowrap;
+}
+
+
+.doctor-name small {
+    display: block;
+    color: #94a3b8;
+    font-size: 10px;
+    margin-top: 3px;
+}
+
+
+
+/* ========================= */
+/* NORMAL TEXT */
+/* ========================= */
+
+.normal-text {
+    white-space: nowrap;
+}
+
+
+
+/* ========================= */
+/* SPECIALIZATION */
+/* ========================= */
+
+.specialization {
+    display: inline-block;
+    background: #eff6ff;
+    color: #2563eb;
+    padding: 5px 9px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+
+/* ========================= */
+/* EXPERIENCE */
+/* ========================= */
+
+.experience {
+    color: #047857;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+.mobile {
+    white-space: nowrap;
+}
+
+
+    .mobile i {
+        color: #059669;
+        margin-right: 5px;
+    }
+
+
+
+/* ========================= */
+/* EMAIL */
+/* ========================= */
+
+.email {
+    color: #475569;
+    white-space: nowrap;
+}
+
+
+
+/* ========================= */
+/* ADDRESS */
+/* ========================= */
+
+.address {
+    display: block;
+    max-width: 180px;
+    white-space: normal;
+    line-height: 1.5;
+}
+
+
+
+/* ========================= */
+/* ACTION BUTTONS */
+/* ========================= */
+
+.action-buttons {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    white-space: nowrap;
+}
+
+
+
+/* Edit */
+
+.edit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #dbeafe;
+    color: #2563eb;
+    padding: 8px 11px;
+    border-radius: 7px;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+
+    .edit-btn:hover {
+        background: #2563eb;
+        color: white;
+    }
+
+
+
+/* Delete */
+
+.delete-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 8px 11px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .2s;
+}
+
+
+    .delete-btn:hover {
+        background: #dc2626;
+        color: white;
+    }
+
+
+    .delete-btn i,
+    .edit-btn i {
+        font-size: 11px;
+    }
+
+
+
+/* ========================= */
+/* NO DATA */
+/* ========================= */
+
+.no-data {
+    text-align: center;
+    padding: 60px 20px !important;
+}
+
+
+.empty-icon {
+    width: 65px;
+    height: 65px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ecfdf5;
+    color: #10b981;
+    font-size: 25px;
+}
+
+
+.no-data h3 {
+    color: #334155;
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+
+.no-data p {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 1000px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+        padding: 20px;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+
+
+/* ========================= */
+/* MOBILE RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        padding: 15px;
+    }
+
+
+    .logo {
+        margin-bottom: 15px;
+    }
+
+
+    .sidebar nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+
+        .sidebar nav a {
+            flex: 1;
+            min-width: 120px;
+        }
+
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+
+    .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+
+    .admin-name {
+        width: 100%;
+    }
+
+
+    .content-card {
+        padding: 15px;
+    }
+}

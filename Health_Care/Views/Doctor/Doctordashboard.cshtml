@@ -1,0 +1,785 @@
+﻿
+@{
+    Layout = null;
+
+    string doctorName =
+        Session["DoctorFN"] != null
+        ? Session["DoctorFN"].ToString()
+        : "Doctor";
+
+    string doctorLastName =
+        Session["DoctorLN"] != null
+        ? Session["DoctorLN"].ToString()
+        : "";
+
+    string specialization =
+        Session["Specialization"] != null
+        ? Session["Specialization"].ToString()
+        : "Medical Specialist";
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        Doctor Dashboard - CarePlus
+    </title>
+
+
+    <link rel="stylesheet"
+          href="~/Content/doctor-dashboard.css" />
+
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+</head>
+
+
+<body>
+
+
+    <!-- ===================================== -->
+    <!-- SIDEBAR -->
+    <!-- ===================================== -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                +
+            </div>
+
+            <span>
+                CarePlus
+            </span>
+
+        </div>
+
+
+        <!-- DOCTOR PROFILE -->
+
+        <div class="doctor-mini-profile">
+
+
+            <div class="doctor-avatar">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+            </div>
+
+
+            <div>
+
+                <h3>
+                    Dr. @doctorName @doctorLastName
+                </h3>
+
+                <p>
+                    @specialization
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- MENU -->
+
+        <nav class="sidebar-menu">
+
+
+            <a href="@Url.Action("Index","Doctor")"
+               class="menu-item active">
+
+                <i class="fa-solid fa-chart-pie"></i>
+
+                <span>
+                    Dashboard
+                </span>
+
+            </a>
+
+
+            <a href="\Doctor\Appointments"
+               class="menu-item">
+
+                <i class="fa-solid fa-calendar-days"></i>
+
+                <span>
+                    Appointments
+                </span>
+
+            </a>
+
+
+            <a href="\Doctor\MyPatients"
+               class="menu-item">
+
+                <i class="fa-solid fa-users"></i>
+
+                <span>
+                    My Patients
+                </span>
+
+            </a>
+
+
+            <a href="\Doctor\MyProfile"
+               class="menu-item">
+
+                <i class="fa-solid fa-user-doctor"></i>
+
+                <span>
+                    My Profile
+                </span>
+
+            </a>
+
+
+            <a href="#"
+               class="menu-item">
+
+                <i class="fa-solid fa-gear"></i>
+
+                <span>
+                    Settings
+                </span>
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- LOGOUT -->
+
+        <div class="sidebar-bottom">
+
+            <a href="@Url.Action("Logout","Doctor")"
+               class="logout">
+
+                <i class="fa-solid fa-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+
+    </aside>
+
+
+    <!-- ===================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================== -->
+
+    <main class="main-content">
+
+
+        <!-- TOPBAR -->
+
+        <header class="topbar">
+
+
+            <div>
+
+                <h1>
+                    Doctor Dashboard
+                </h1>
+
+                <p>
+                    Manage your healthcare activities from one place.
+                </p>
+
+            </div>
+
+
+            <div class="topbar-right">
+
+
+                <button class="notification">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+
+                <div class="top-profile">
+
+
+                    <div class="small-avatar">
+
+                        <i class="fa-solid fa-user-doctor"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Dr. @doctorName @doctorLastName
+                        </strong>
+
+                        <span>
+                            @specialization
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </header>
+
+
+        <!-- ===================================== -->
+        <!-- WELCOME -->
+        <!-- ===================================== -->
+
+        <section class="welcome-banner">
+
+
+            <div class="welcome-text">
+
+
+                <span class="welcome-label">
+
+                    Good Morning 👋
+
+                </span>
+
+
+                <h2>
+
+                    Welcome back,
+                    Dr. @doctorName!
+
+                </h2>
+
+
+                <p>
+
+                    Here's what's happening with
+                    your patients today.
+
+                </p>
+
+
+            </div>
+
+
+            <div class="welcome-icon">
+
+                <i class="fa-solid fa-stethoscope"></i>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- STAT CARDS -->
+        <!-- ===================================== -->
+
+        <section class="stats-grid">
+
+
+            <!-- TODAY -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-icon blue">
+
+                    <i class="fa-solid fa-calendar-check"></i>
+
+                </div>
+
+
+                <div class="stat-info">
+
+                    <span>
+                        Today's Appointments
+                    </span>
+
+
+                    <h2>
+                        @ViewBag.TodayAppointments
+                    </h2>
+
+
+                    <p>
+                        Appointments for today
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PATIENTS -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-icon green">
+
+                    <i class="fa-solid fa-users"></i>
+
+                </div>
+
+
+                <div class="stat-info">
+
+                    <span>
+                        Total Patients
+                    </span>
+
+
+                    <h2>
+                        @ViewBag.TotalPatients
+                    </h2>
+
+
+                    <p>
+                        Patients who booked with you
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- PENDING -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-icon orange">
+
+                    <i class="fa-solid fa-user-clock"></i>
+
+                </div>
+
+
+                <div class="stat-info">
+
+                    <span>
+                        Pending Appointments
+                    </span>
+
+
+                    <h2>
+                        @ViewBag.PendingAppointments
+                    </h2>
+
+
+                    <p>
+                        Need your attention
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <!-- COMPLETED -->
+
+            <div class="stat-card">
+
+
+                <div class="stat-icon purple">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                </div>
+
+
+                <div class="stat-info">
+
+                    <span>
+                        Completed
+                    </span>
+
+
+                    <h2>
+                        @ViewBag.CompletedAppointments
+                    </h2>
+
+
+                    <p>
+                        Completed appointments
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- ===================================== -->
+        <!-- CONTENT GRID -->
+        <!-- ===================================== -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- ================================= -->
+            <!-- TODAY'S APPOINTMENTS -->
+            <!-- ================================= -->
+
+            <div class="dashboard-card appointments-card">
+
+
+                <div class="card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Today's Appointments
+                        </h2>
+
+                        <p>
+                            Your scheduled patient visits
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="appointment-list">
+
+
+                    @if (ViewBag.Appointments != null &&
+                         ViewBag.Appointments.Count > 0)
+                    {
+
+                        foreach (var item in ViewBag.Appointments)
+                        {
+
+                            <div class="appointment">
+
+
+                                <!-- PATIENT AVATAR -->
+
+                                <div class="patient-avatar">
+
+                                    @item.FirstName.Substring(0, 1)
+                                    @item.LastName.Substring(0, 1)
+
+                                </div>
+
+
+                                <!-- PATIENT -->
+
+                                <div class="appointment-info">
+
+
+                                    <h3>
+
+                                        @item.FirstName
+                                        @item.LastName
+
+                                    </h3>
+
+
+                                    <p>
+
+                                        @item.Reason
+
+                                    </p>
+
+
+                                    <small>
+
+                                        @item.Email
+
+                                    </small>
+
+
+                                </div>
+
+
+                                <!-- TIME -->
+
+                                <div class="appointment-time">
+
+
+                                    <strong>
+
+                                        @item.AppointmentTime
+
+                                    </strong>
+
+
+                                    @if (item.Status == "Confirmed")
+                                    {
+
+                                        <span class="confirmed">
+
+                                            Confirmed
+
+                                        </span>
+
+                                    }
+                                    else if (item.Status == "Completed")
+                                    {
+
+                                        <span class="completed">
+
+                                            Completed
+
+                                        </span>
+
+                                    }
+                                    else if (item.Status == "Cancelled")
+                                    {
+
+                                        <span class="cancelled">
+
+                                            Cancelled
+
+                                        </span>
+
+                                    }
+                                    else
+                                    {
+
+                                        <span class="pending">
+
+                                            @item.Status
+
+                                        </span>
+
+                                    }
+
+
+                                </div>
+
+
+                            </div>
+
+                        }
+
+                    }
+                    else
+                    {
+
+
+                        <div class="no-appointment">
+
+
+                            <i class="fa-solid fa-calendar-xmark"></i>
+
+
+                            <h3>
+                                No Appointments Today
+                            </h3>
+
+
+                            <p>
+                                You don't have any appointments scheduled for today.
+                            </p>
+
+
+                        </div>
+
+
+                    }
+
+
+                </div>
+
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- QUICK ACTIONS -->
+            <!-- ================================= -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+
+                    <div>
+
+                        <h2>
+                            Quick Actions
+                        </h2>
+
+                        <p>
+                            Frequently used options
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="quick-actions">
+
+
+                    <a href="#"
+                       class="action-card">
+
+
+                        <div class="action-icon blue">
+
+                            <i class="fa-solid fa-calendar-plus"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Appointments
+                            </strong>
+
+                            <span>
+                                Manage appointments
+                            </span>
+
+                        </div>
+
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                    </a>
+
+
+                    <a href="#"
+                       class="action-card">
+
+
+                        <div class="action-icon green">
+
+                            <i class="fa-solid fa-user-group"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                Patients
+                            </strong>
+
+                            <span>
+                                View patient records
+                            </span>
+
+                        </div>
+
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                    </a>
+
+
+                    <a href="#"
+                       class="action-card">
+
+
+                        <div class="action-icon purple">
+
+                            <i class="fa-solid fa-user-pen"></i>
+
+                        </div>
+
+
+                        <div>
+
+                            <strong>
+                                My Profile
+                            </strong>
+
+                            <span>
+                                Update your profile
+                            </span>
+
+                        </div>
+
+
+                        <i class="fa-solid fa-chevron-right arrow"></i>
+
+
+                    </a>
+
+
+                    <div class="sidebar-bottom">
+
+                        <a href="@Url.Action("Logout","Doctor")"
+                           class="logout">
+
+                            <i class="fa-solid fa-right-from-bracket"></i>
+
+                            <span>
+                                Logout
+                            </span>
+
+                        </a>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+
+            <p>
+
+                © 2026 CarePlus Healthcare.
+                All rights reserved.
+
+            </p>
+
+        </footer>
+
+
+    </main>
+
+
+</body>
+
+</html>

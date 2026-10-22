@@ -1,0 +1,459 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f4f8f7;
+    color: #263238;
+}
+
+
+/* =========================
+   SIDEBAR
+   ========================= */
+
+.sidebar {
+    width: 260px;
+    height: 100vh;
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: #0f766e;
+    color: white;
+    padding: 25px 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 25px;
+    font-weight: bold;
+    padding: 5px 10px 25px;
+}
+
+
+.logo-icon {
+    width: 38px;
+    height: 38px;
+    background: white;
+    color: #0f766e;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+
+.doctor-mini-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 10px;
+    border-top: 1px solid rgba(255,255,255,.2);
+    border-bottom: 1px solid rgba(255,255,255,.2);
+}
+
+
+.doctor-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: white;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+}
+
+
+.doctor-mini-profile h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+
+.doctor-mini-profile p {
+    font-size: 12px;
+    opacity: .8;
+}
+
+
+/* =========================
+   MENU
+   ========================= */
+
+.sidebar-menu {
+    margin-top: 25px;
+}
+
+
+.menu-item {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 15px;
+    border-radius: 10px;
+    margin-bottom: 8px;
+    transition: .3s;
+}
+
+
+    .menu-item:hover,
+    .menu-item.active {
+        background: rgba(255,255,255,.15);
+    }
+
+
+    .menu-item i {
+        width: 20px;
+    }
+
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+
+.logout {
+    text-decoration: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 13px 15px;
+}
+
+
+/* =========================
+   MAIN
+   ========================= */
+
+.main-content {
+    margin-left: 260px;
+    min-height: 100vh;
+}
+
+
+/* =========================
+   TOPBAR
+   ========================= */
+
+.topbar {
+    background: white;
+    padding: 25px 35px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+    .topbar h1 {
+        font-size: 28px;
+        margin-bottom: 6px;
+    }
+
+
+    .topbar p {
+        color: #718096;
+    }
+
+
+.top-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+
+.small-avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #dff7f3;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.top-profile strong {
+    display: block;
+}
+
+
+.top-profile span {
+    font-size: 13px;
+    color: #718096;
+}
+
+
+/* =========================
+   CONTENT
+   ========================= */
+
+.patients-container {
+    padding: 35px;
+}
+
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+
+    .page-header h2 {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+
+    .page-header p {
+        color: #718096;
+    }
+
+
+.patient-count {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #dff7f3;
+    color: #0f766e;
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   PATIENT CARD
+   ========================= */
+
+.patients-card {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.patient-card {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+}
+
+
+/* =========================
+   PATIENT HEADER
+   ========================= */
+
+.patient-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding-bottom: 22px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+
+.patient-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #dff7f3;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+
+.patient-name h3 {
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+
+.patient-name p {
+    color: #718096;
+    font-size: 14px;
+}
+
+
+/* =========================
+   INFORMATION
+   ========================= */
+
+.patient-information {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 22px;
+}
+
+
+.info-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    background: #f7faf9;
+    padding: 16px;
+    border-radius: 10px;
+}
+
+
+    .info-box > i {
+        color: #0f766e;
+        font-size: 18px;
+        margin-top: 3px;
+    }
+
+
+    .info-box label {
+        display: block;
+        color: #718096;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+
+    .info-box p {
+        font-size: 14px;
+        font-weight: 600;
+        word-break: break-word;
+    }
+
+
+.address-box {
+    grid-column: 1 / -1;
+}
+
+
+/* =========================
+   EMPTY
+   ========================= */
+
+.empty-state {
+    background: white;
+    text-align: center;
+    padding: 70px 20px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0,0,0,.05);
+}
+
+
+.empty-icon {
+    width: 70px;
+    height: 70px;
+    margin: auto;
+    margin-bottom: 20px;
+    border-radius: 50%;
+    background: #e6f7f4;
+    color: #0f766e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+}
+
+
+.empty-state h2 {
+    margin-bottom: 8px;
+}
+
+
+.empty-state p {
+    color: #718096;
+}
+
+
+/* =========================
+   FOOTER
+   ========================= */
+
+footer {
+    padding: 20px 35px;
+    text-align: center;
+    color: #718096;
+    font-size: 13px;
+}
+
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 1000px) {
+
+    .patient-information {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
+@media (max-width: 800px) {
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+    }
+
+    .top-profile {
+        display: none;
+    }
+
+    .patients-container {
+        padding: 20px;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .main-content {
+        margin-left: 0;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .patient-information {
+        grid-template-columns: 1fr;
+    }
+
+    .address-box {
+        grid-column: auto;
+    }
+}
